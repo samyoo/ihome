@@ -16,22 +16,10 @@ public class SessionHandler extends Handler {
         if (index != -1)
             target = target.substring(0, index);
 
-        if (!(target.startsWith("/static") || isAjaxRequest(request))) {
-            setMenu(request);
-        }
 
         nextHandler.handle(target, request, response, isHandled);
     }
 
-    public void setMenu(HttpServletRequest request) {
-        String contextPath = request.getContextPath();
-        String url = request.getRequestURI().replaceFirst(contextPath, "");
-        Record record = Db.findFirst("select id,pId from t_menu where url=?",url);
-        if(record != null){
-            request.setAttribute("__id", record.getStr("id"));
-            request.setAttribute("__pId", record.getStr("pId"));
-        }
-    }
 
     public boolean isAjaxRequest(HttpServletRequest request) {
         boolean isAjaxRequest = false;

@@ -10,6 +10,9 @@ public class IndexController extends Controller {
 		render("index.html");
 	}
 
+	public void login(){
+        render("login.html");
+    }
 
 }
 

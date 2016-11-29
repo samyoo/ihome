@@ -1,5 +1,6 @@
 package com.ihome.common;
 
+import com.ihome.common.interceptor.UserInterceptor;
 import com.ihome.common.plugin.SchedulerPlugin;
 import com.ihome.core.controller.IndexController;
 import com.jfinal.config.*;
@@ -52,6 +53,7 @@ public class AppConfig extends JFinalConfig {
      */
     public void configRoute(Routes me) {
         me.add("/", IndexController.class);
+
     }
 
     /**
@@ -93,6 +95,8 @@ public class AppConfig extends JFinalConfig {
     public void configInterceptor(Interceptors me) {
         // 在VIEW中可以使用SESSION
         me.add(new SessionInViewInterceptor());
+
+        me.add(new UserInterceptor());
 
         me.add(new TxByMethods("save","update","delete"));
     }
