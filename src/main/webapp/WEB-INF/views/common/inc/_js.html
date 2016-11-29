@@ -1,0 +1,42 @@
+<!-- bootstrap & fontawesome -->
+<script src="${contextPath}/static/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+<script src="${contextPath}/static/javascripts/site.js" type="text/javascript"></script>
+
+
+<script src="${contextPath}/static/vendor/js/jquery.mmenu.min.js" type="text/javascript"></script>
+<script src="${contextPath}/static/vendor/js/jquery.sparkline.min.js" type="text/javascript"></script>
+<script src="${contextPath}/static/vendor/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+<script src="${contextPath}/static/vendor/js/minimal.min.js" type="text/javascript"></script>
+
+<script src="${contextPath}/static/js/bootstrap3/dist/js/bootstrap.js" type="text/javascript"></script>
+<script src="${contextPath}/static/js/layer/layer.js" type="text/javascript"></script>
+
+<script type="application/javascript" src="${contextPath}/static/js/jquery.dataTables.min.js"></script>
+
+
+<script src="${contextPath}/static/js/tracker.js" type="text/javascript"></script>
+<!-- page specific plugin BEGIN -->
+${pageJavascript}
+<!-- page specific plugin END -->
+
+<script>
+	/** 公共js **/
+	
+	$("[rel=tooltip]").tooltip({animation:false});
+	$(function() {
+	    $('.demo-cancel-click').click(function(){return false;});
+	});
+	
+	//menu flod
+	function flodMenu (o) {
+		var obj = o.nextSibling.nextSibling;
+		//display
+		if(obj.style.display == "none" || obj.style.display == "") {
+			obj.style.display = "block";
+			obj.style.position = "relative";
+			obj.style.cssFloat = "none";
+		}else{//hide
+			obj.style.display = "none";
+		}
+	}
+</script>

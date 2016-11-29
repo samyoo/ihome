@@ -1,0 +1,146 @@
+
+h2 {
+    color: #41414c;
+    font-size: 1.25em;
+    font-weight: normal;
+    padding-left: 15px;
+}
+img {
+    max-width: 100%;
+}
+label {
+    font-weight: normal;
+}
+footer {
+    clear: both;
+    color: #b4b4bf;
+    text-shadow: 1px 1px 0px #fff;
+    padding: 1em;
+    padding-top: 4em;
+    font-size: .85em;
+    line-height: 1.3em;
+}
+footer a {
+    color: #b4b4bf;
+}
+.nav a{
+    color:#333;
+}
+#title_top{
+    cursor: pointer;
+    margin-right: 30px;
+}
+#title_sidebar{
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.cur_hand{
+    cursor: pointer;
+    color: #0077b3;
+}
+
+.dataTables_filter {
+    display: none;
+}
+
+td.details-control {
+    background: url('../img/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('../img/details_close.png') no-repeat center center;
+}
+
+/*Gallery*/
+.gallery .img-polaroid {
+    padding: 4px;
+    border: 0px;
+}
+.gallery img {
+    width: 220px;
+}
+.gallery .thumbnail {
+    margin: .75em .75em 0em 0em;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+
+.gallery img {
+    display: block;
+    -webkit-transition: all 0.25s linear;
+    -moz-transition: all 0.25s linear;
+    -ms-transition: all 0.25s linear;
+    -o-transition: all 0.25s linear;
+    transition: all 0.25s linear;
+}
+.gallery img:hover {
+    opacity: 0.8;
+}
+/**
+    天猫图标
+*/
+.icon-tmall{
+    display: inline-block;
+    font-size: 0;
+    background: url('../img/tmall_img.png');
+    background-repeat: no-repeat;
+}
+
+.tianmao {
+    background-position: -213px -199px;
+    width: 16px;
+    height: 16px;
+}
+
+.remai {
+    background-position: -5px -113px;
+    width: 49px;
+    height: 16px;
+}
+
+.fahuo{
+    background-position:-177px -165px;
+    width:16px;
+    height:16px
+}
+.yujin{
+    background-position: -217px -57px;
+    width:16px;
+    height:16px
+}
+.xin{
+    background-position: -83px -199px;
+    width:16px;
+    height:16px
+}
+.icon-az{
+    display: inline-block;
+    font-size: 0;
+    background: url('../img/az.png');
+    background-repeat: no-repeat;
+    width:33px;
+    height:16px
+}
+
+/**
+    京东图标
+*/
+.icon-jd{
+    display: inline-block;
+    font-size: 0;
+    background: url('../img/jd_all_img.png');
+    background-repeat: no-repeat;
+}
+
+.jd-zy{
+    background-position: -76px -185px;
+    width: 27px;
+    height: 16px;
+}
+

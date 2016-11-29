@@ -1,0 +1,40 @@
+<!-- Sidebar -->
+<ul class="nav navbar-nav side-nav" id="sidebar">
+    <li class="navigation" id="navigation">
+        <!--<a href="#" class="sidebar-toggle" data-toggle="#navigation">Navigation <i class="fa fa-angle-up"></i></a>-->
+        <ul class="menu">
+            <!--<li>
+                <a href="index.html">
+                    <i class="icon-dashboard"></i> Dashboard
+                    <span class="badge badge-red">1</span>
+                </a>
+
+                "<#if s.id==__id> active </#if>"
+        			<#if __pId != s.pId>style="display:none;"</#if>
+            </li>-->
+
+                <#list session["LOGIN_ACCOUNT"].menuList as s>
+                    <li class="dropdown <#if s.id==__pId> open </#if> ">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class=" ${s.icon}"></i> ${s.name} <b class="icon-plus dropdown-plus"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <#list s.children as child>
+                            <li class="<#if child.id==__id> active </#if>">
+                                <a href="${contextPath}${urlPrefix}${child.url}">
+                                    <#if child.icon??>
+                                        <i class="${child.icon}"></i>
+                                    <#else>
+                                            <i class="icon-bar-chart"></i>
+                                    </#if>
+                                    ${child.name}
+                                </a>
+                            </li>
+                            </#list>
+                        </ul>
+                    </li>
+                </#list>
+        </ul>
+
+</ul>
+<!-- Sidebar end -->

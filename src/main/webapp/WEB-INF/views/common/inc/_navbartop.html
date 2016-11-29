@@ -1,0 +1,33 @@
+<!-- Quick Actions -->
+<ul class="nav navbar-nav quick-actions">
+
+    <li class="dropdown divided">
+
+        <a class="dropdown-toggle " data-toggle="modal" href="#myModal" id="test">
+            <i class="icon-anchor"></i>
+            <#if session["LOGIN_ACCOUNT"].currentModuleName??>
+                ${session["LOGIN_ACCOUNT"].currentModuleName}
+                <#else>
+                    选择站点
+            </#if>
+        </a>
+    </li>
+
+    <li class="dropdown divided " >
+        <a class="dropdown-toggle options" data-toggle="dropdown" href="#">
+            <i class="icon-user"> </i>${session["LOGIN_ACCOUNT"].userName} <i class="icon-angle-down"></i>
+        </a>
+        <ul class="dropdown-menu arrow settings">
+            <li>
+                <a href="#"><i class=" icon-cog"></i> 设置</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="${contextPath}/login/logout"><i class="icon-off"></i> 退出</a>
+            </li>
+        </ul>
+    </li>
+
+</ul>
+
+<!-- /Quick Actions -->
