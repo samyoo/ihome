@@ -153,7 +153,7 @@ layui.config({
                 ulHtml += '</a>';
                 ulHtml += '<dl class="layui-nav-child">'
                 for(var j = 0; j < data[i].children.length; j++) {
-                    ulHtml += '<dd>';
+                    ulHtml += '<dd style="background-color: #2F4056;">';
                     ulHtml += '<a href="javascript:;" data-url="' + data[i].children[j].href + '">';
                     if(data[i].children[j].icon !== undefined && data[i].children[j].icon !== '') {
                         if(data[i].children[j].icon.indexOf('fa-') !== -1) {

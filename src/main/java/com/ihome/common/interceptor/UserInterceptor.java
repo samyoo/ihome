@@ -1,6 +1,7 @@
 package com.ihome.common.interceptor;
 
 import com.ihome.common.constant.Constants;
+import com.ihome.common.utils.StrUtil;
 import com.ihome.core.model.User;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
@@ -16,18 +17,18 @@ public class UserInterceptor implements Interceptor {
         HttpServletRequest request = controller.getRequest();
         User user = (User) request.getSession().getAttribute(Constants.LOGIN_ACCOUNT);
         inv.invoke();
-       /* if(user != null
+        if(user != null
                 ||inv.getMethodName().equals("login")
                 ||inv.getMethodName().equals("home")) {
             inv.invoke();
         } else {
-          *//*  String querystring = request.getQueryString();
+           /* String querystring = request.getQueryString();
             String beforeUrl = request.getRequestURL() + "?" + querystring;
             if(StrUtil.isBlank(querystring)) {
                 beforeUrl = request.getRequestURL().toString();
-            }*//*
+            }*/
             controller.redirect("/login");
-        }*/
+        }
     }
 
 }

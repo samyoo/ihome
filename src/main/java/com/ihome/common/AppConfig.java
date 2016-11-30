@@ -96,7 +96,7 @@ public class AppConfig extends JFinalConfig {
         // 在VIEW中可以使用SESSION
         me.add(new SessionInViewInterceptor());
 
-        me.add(new UserInterceptor());
+        //me.add(new UserInterceptor());
 
         me.add(new TxByMethods("save","update","delete"));
     }
