@@ -22,14 +22,14 @@
 
 .header-index{background-color: #080018; border: none;}
 
-.layui-layout-admin .header-demo{border-bottom-color: #009688; background-color: #fff;}
+.layui-layout-admin .header-demo{border-bottom-color: #009688; /*background-color: #fff;*/}
 .header-demo .logo{left: 40px;}
 .header-demo .layui-nav{top: 0;}
 .header-demo .layui-nav .layui-nav-item{margin: 0 10px; line-height: 70px;}
 .header-demo .layui-nav .layui-nav-item a{color: #999;}
 .header-demo .layui-nav .layui-this{background-color: #f2f2f2;}
 .header-demo .layui-nav .layui-nav-item a:hover,
-.header-demo .layui-nav .layui-this a{color: #000;}
+.header-demo .layui-nav .layui-this a{color: #FFF;}
 .header-demo .layui-nav .layui-this:after,
 .header-demo .layui-nav-bar{background-color: #393D49;}
 .header-demo .layui-nav .layui-this a{padding: 0 30px;}

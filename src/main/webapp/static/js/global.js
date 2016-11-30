@@ -10,9 +10,9 @@ layui.define(['layer', 'code', 'form', 'element', 'util'], function(exports){
         ,device = layui.device();
 
     //阻止IE7以下访问
-    if(device.ie && device.ie < 8){
+   /* if(device.ie && device.ie < 8){
         layer.alert('Layui最低支持ie8，您当前使用的是古老的 IE'+ device.ie + '，你丫的肯定不是程序猿！');
-    }
+    }*/
 
 
     //首页banner
@@ -55,7 +55,7 @@ layui.define(['layer', 'code', 'form', 'element', 'util'], function(exports){
     });*/
 
     //窗口scroll
-    ;!function(){
+    /*;!function(){
         var main = $('.site-tree').parent(), scroll = function(){
             var stop = $(window).scrollTop();
             if($(window).width() <= 750) return;
@@ -80,15 +80,15 @@ layui.define(['layer', 'code', 'form', 'element', 'util'], function(exports){
         };
         scroll();
         $(window).on('scroll', scroll);
-    }();
+    }();*/
 
     //代码修饰
-    layui.code({
+    /*layui.code({
         elem: 'pre'
-    });
+    });*/
 
     //目录
-    var siteDir = $('.site-dir');
+   /* var siteDir = $('.site-dir');
     if(siteDir[0] && $(window).width() > 750){
         layer.open({
             type: 1
@@ -109,17 +109,17 @@ layui.define(['layer', 'code', 'form', 'element', 'util'], function(exports){
             othis.find('a').addClass('layui-this');
             othis.siblings().find('a').removeClass('layui-this');
         });
-    }
+    }*/
 
     //在textarea焦点处插入字符
-    var focusInsert = function(str){
+ /*   var focusInsert = function(str){
         var start = this.selectionStart
             ,end = this.selectionEnd
             ,offset = start + str.length
 
         this.value = this.value.substring(0, start) + str + this.value.substring(end);
         this.setSelectionRange(offset, offset);
-    };
+    };*/
 
     //演示页面
    /* $('body').on('keydown', '#LAY_editor, .site-demo-text', function(e){
@@ -157,7 +157,7 @@ layui.define(['layer', 'code', 'form', 'element', 'util'], function(exports){
 
 
     //手机设备的简单适配
-    var treeMobile = $('.site-tree-mobile')
+   /* var treeMobile = $('.site-tree-mobile')
         ,shadeMobile = $('.site-mobile-shade')
 
     treeMobile.on('click', function(){
@@ -168,5 +168,5 @@ layui.define(['layer', 'code', 'form', 'element', 'util'], function(exports){
         $('body').removeClass('site-mobile');
     });
 
-    exports('global', {});
+    exports('global', {});*/
 });

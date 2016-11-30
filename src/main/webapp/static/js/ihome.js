@@ -1,3 +1,13 @@
+/**
+ * layui 组件
+ * @type {any}
+ */
+var layer = layui.layer
+    ,form = layui.form()
+    ,util = layui.util
+    ,element = layui.element();
+
+
 //时间格式化
 Date.prototype.Format = function (fmt) { //author: meizz
     var o = {
@@ -51,39 +61,6 @@ String.prototype.replaceAll  = function(s1,s2){
 
 // common 主要封装常用方法
 var common = {};
-
-/**
- *
- * @param id 表格id
- * @param options 设置列属性
- * @returns {jQuery}
- */
-common.table = function(id,options){
-    var defaults = {
-        "processing": false,//进度度
-        "serverSide": true,//服务器分页
-        "bSort": false, //排序
-        "bFilter": false,//过滤
-        "searching": false,//搜索
-        //"bStateSave":true,
-        "bLengthChange": false,//是否 显示每页条数
-        // "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "所有"] ], //设置 每页显示条数
-        "ajax":{
-            "type":"POST",
-            "beforeSend":function(){
-                common.loading();
-            },
-            "complete":function(){
-                common.stop();
-            }
-        },
-        "language": { //语言
-            "url": "/tracker/static/i18n/zh.json"
-        },
-    }
-    $.extend(true,defaults, options);
-    return $("#"+id).DataTable(defaults);
-};
 
 /**
  * post请求
@@ -174,122 +151,6 @@ common.getYearWeek = function () {
     )-1;
 };
 
-
-/**
- *
- * @param isTm  是否天猫
- * @param spu   商品spu
- * @param name  商吕名称
- * @returns {string} itemUrl
- */
-common.getTbUrl = function (isTm, spu, name) {
-    var top = "rel='tooltip' data-placement='top' data-original-title='"+name+"'";
-    if(name.length>25){
-        name = name.substring(0,25)+"...";
-    }
-    if (isTm == 1) {
-        return "<a target='_blank' href='https://detail.tmall.com/item.htm?id=" + spu + "' "+top+" >" + name + "</a>";
-    } else {
-        return "<a target='_blank' href='https://item.taobao.com/item.htm?id=" + spu + "' "+top+" >" + name + "</a>";
-    }
-}
-
-common.getJdUrl = function (sku,name) {
-    if(name == null) name = "";
-    var top = "rel='tooltip' data-placement='top' data-original-title='"+name+"'";
-    if(name.length>25){
-        name = name.substring(0,25)+"...";
-    }
-    return "<a target='_blank' href='http://item.jd.com/" + sku + ".html' "+top+" >" + name + "</a>";
-}
-
-/**
- * 获取图标
- * @param type
- * @returns {*}
- */
-common.getIcon = function(type){
-    var icon = {
-        tm:"<span class='icon-tmall tianmao' rel='tooltip' data-placement='top' data-original-title='天猫商城'></span> ",
-        rm:"<span class='icon-tmall remai' rel='tooltip' data-placement='top' data-original-title='投放广告'></span> ",
-        fh:"<span class='icon-tmall fahuo' rel='tooltip' data-placement='top' data-original-title='菜鸟联盟'></span> ",
-        yu:"<span class='icon-tmall yujin' rel='tooltip' data-placement='top' data-original-title='预警'></span> ",
-        xin:"<span class='icon-tmall xin' rel='tooltip' data-placement='top' data-original-title='新品'></span> ",
-        fba:"<span class='icon-tmall fahuo' rel='tooltip' data-placement='top' data-original-title='FBA'></span> ",
-        az:"<span class='icon-az' rel='tooltip' data-placement='top' data-original-title='亚马逊自营'></span>",
-        phone:"<span class='icon-mobile-phone' style='color: #E9A42A' rel='tooltip' data-placement='top' data-original-title='主机'></span>",
-        compete:"<span class='icon-hdd' style='color: #58B058' rel='tooltip' data-placement='top' data-original-title='竞品'></span>",
-    }
-    return icon[type];
-}
-
-
-/**
- * 生成相册层
- * @param imgs
- * @returns {string}
- */
-common.getImages = function(imgs){
-    var html = "<div class='thumbnail' style='width: 80px;'> "
-    for (var i in imgs) {
-        if (i >= 2) {
-            html += "<i style='display: none;'><img layer-src='" + imgs[i] + "' src='" + imgs[i] + "'  /></i>";
-        } else {
-            html += "<i class='cur_hand'  ><img layer-src='" + imgs[i] + "' src='" + imgs[i] + "'  /></i>";
-        }
-    }
-    html += "</div>";
-    return html;
-}
-
-/**
- *
- * @param webType amazon站点
- * @param asin   商品asin
- * @param name   商品名称
- * @returns {string}
- */
-common.getAzUrl = function (webType, asin, name) {
-    var top = "rel='tooltip' data-placement='top' data-original-title='"+name+"'";
-    if(name==null||name==''||name==undefined){
-        return '';
-    }
-    if(name.length>35){
-        name = name.substring(0,35)+"...";
-    }
-    if (webType == 'azus') {
-        return "<a target='_blank' href='https://www.amazon.com/dp/" + asin + "' "+top+" >" + name + "</a>";
-    } else if (webType == 'azuk') {
-        return "<a target='_blank' href='https://www.amazon.co.uk/dp/" + asin + "' "+top+" >" + name + "</a>";
-    } else if (webType == 'azde') {
-        return "<a target='_blank' href='https://www.amazon.de/dp/" + asin + "' "+top+" >" + name + "</a>";
-    } else if (webType == 'azjp') {
-        return "<a target='_blank' href='https://www.amazon.jp/dp/" + asin + "' "+top+" >" + name + "</a>";
-    }
-    return "未知";
-}
-
-/**
- * 处理各国价格标签
- * @param webType
- * @param price
- * @returns {*}
- */
-common.handlePrice = function(webType,price){
-    var reg = "\\$"
-    if ("azus" == webType) {
-        reg = "\\$"
-    } else if ("azuk" == webType) {
-        reg = "£";
-    } else if ("azde" == webType) {
-        reg = "EUR ";
-        price = price.replaceAll(",", ".");
-    } else if ("azjp" == webType) {
-        reg = "￥ "
-        price = price.replaceAll(",", "");
-    }
-    return price.replaceAll(reg, "");
-}
 
 
 /**
@@ -409,35 +270,18 @@ common.photos = function(id){
 }
 
 $(function () {
-    //页面标题显示、隐藏效果
-    $("#title_top").on('click', function () {
-        if ($(this).parent().next().is(':visible')) {
-            $("#title_icon").attr("class", "icon-double-angle-up")
-        } else {
-            $("#title_icon").attr("class", "icon-double-angle-down")
-        }
-        $(this).parent().next().toggle();
-    });
-    //左边菜单收起，展开
-  /*  $("#title_sidebar").on('click',function(){
-        var $nav = $("#sidebar-nav");
-        var $content =  $(".content");
-        if($nav.is(':visible')){
-            $("i",$(this)).attr("class","icon-chevron-sign-right");
-            $nav.hide();
-            $content.css("margin-left","0px")
-        }else{
-            $("i",$(this)).attr("class","icon-chevron-sign-left");
-            $nav.show();
-            $content.css("margin-left","200px")
-        }
 
-    })*/
 
-    var _n1 = $(".open a:first ", $("#sidebar")).text();
-    var _n2 = $(".active a ", $("#sidebar")).text();
-    //console.log(_n1 + '-->'+_n2)
-    $("#title_top_n1").text(_n1), $("#title_top_n2").text(_n2);
-
+    //layer.msg('Hello World');
+    common.msg("1243")
+    element.init();
 
 });
+/*
+var layer;
+layui.use(['layer', 'form','element'], function(){
+    layer = layui.layer;
+        //,form = layui.form();
+
+
+});*/
