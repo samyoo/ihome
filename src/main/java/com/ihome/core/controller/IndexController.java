@@ -1,5 +1,7 @@
 package com.ihome.core.controller;
 
+import com.ihome.common.constant.Constants;
+import com.ihome.core.model.User;
 import com.jfinal.core.Controller;
 
 /**
@@ -14,6 +16,18 @@ public class IndexController extends Controller {
         render("login.html");
     }
 
+    public void home(){
+        String acc = getPara("acc");
+        String pwd = getPara("pwd");
+
+        System.out.println(acc);
+        System.out.println(pwd);
+
+        User u = new User();
+        setSessionAttr(Constants.LOGIN_ACCOUNT,u);
+
+        renderJson("{\"msg\":\"ok\"}");
+    }
 }
 
 

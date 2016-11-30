@@ -14,9 +14,11 @@ public class UserInterceptor implements Interceptor {
     public void intercept(Invocation inv) {
         Controller controller = inv.getController();
         HttpServletRequest request = controller.getRequest();
-        User user = (User) request.getSession().getAttribute(Constants.LOGIN_USER);
+        User user = (User) request.getSession().getAttribute(Constants.LOGIN_ACCOUNT);
 
-        if(user != null || inv.getMethodName().equals("login")) {
+        if(user != null
+                ||inv.getMethodName().equals("login")
+                ||inv.getMethodName().equals("home")) {
             inv.invoke();
         } else {
           /*  String querystring = request.getQueryString();

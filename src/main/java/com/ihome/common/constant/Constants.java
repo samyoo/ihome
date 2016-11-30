@@ -5,5 +5,5 @@ package com.ihome.common.constant;
  */
 public class Constants {
 
-    public static final String LOGIN_USER = "";
+    public static final String LOGIN_ACCOUNT = "LOGIN_ACCOUNT";
 }
