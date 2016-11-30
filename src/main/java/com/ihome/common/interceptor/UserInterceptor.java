@@ -15,19 +15,19 @@ public class UserInterceptor implements Interceptor {
         Controller controller = inv.getController();
         HttpServletRequest request = controller.getRequest();
         User user = (User) request.getSession().getAttribute(Constants.LOGIN_ACCOUNT);
-
-        if(user != null
+        inv.invoke();
+       /* if(user != null
                 ||inv.getMethodName().equals("login")
                 ||inv.getMethodName().equals("home")) {
             inv.invoke();
         } else {
-          /*  String querystring = request.getQueryString();
+          *//*  String querystring = request.getQueryString();
             String beforeUrl = request.getRequestURL() + "?" + querystring;
             if(StrUtil.isBlank(querystring)) {
                 beforeUrl = request.getRequestURL().toString();
-            }*/
+            }*//*
             controller.redirect("/login");
-        }
+        }*/
     }
 
 }

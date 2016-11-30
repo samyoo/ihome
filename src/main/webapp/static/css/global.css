@@ -243,6 +243,87 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 .alone li a{display:block; color:#fff;}
 
 
+
+/* 自定义css */
+.admin-header-item-mobile{
+    position: absolute; right: 0px; height: 70px;line-height: 70px;
+    padding: 0 20px; text-align: center; top:0;
+    display: none;
+}
+
+.admin-nav-tree .layui-nav-child a {
+    padding-left: 30px;
+}
+
+.admin-nav-card{
+    border: 0;
+    margin: 0;
+    box-shadow:none;
+}
+.admin-nav-card .layui-icon{
+    position: relative;
+}
+.admin-nav-card .layui-tab-item iframe{
+    width: 100%;
+    border: 0;
+    height: 100%;
+}
+.admin-nav-card>.layui-tab-title{
+    border-bottom: 1px solid #1AA094;
+}
+.admin-nav-card .layui-tab-title cite{
+    font-style: normal;
+    padding-left: 5px;
+}
+.admin-nav-card>.layui-tab-title .layui-this{
+    color: white;
+    background-color: #1AA094;
+}
+.admin-nav-card>.layui-tab-title .layui-this:after{
+    border-bottom: 0;
+}
+.admin-header-user img{
+    width: 40px; height: 40px; border-radius: 100%;    position: relative;
+    top: 15px;
+}
+.admin-header-user .layui-nav-more{
+    top:33px;
+}
+.admin-header-user .layui-nav-mored{
+    top: 26px;
+}
+
+
+/*table*/
+.site-table tbody tr td {text-align: center;}
+.site-table tbody tr td .layui-btn+.layui-btn{margin-left: 0px;}
+.admin-table-page {/*position: fixed;*/z-index: 19940201;bottom: 0;width: 100%;background-color: #eee;border-bottom: 1px solid #ddd;left: 0px;}
+.admin-table-page .page{padding-left:20px;}
+.admin-table-page .page .layui-laypage {margin: 6px 0 0 0;}
+
+/**/
+.admin-main {margin: 15px;}
+
+.admin-side-toggle{
+    position: absolute; cursor: pointer;
+    z-index: 19940201;
+    left: 200px;
+    color: white;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    background-color: #1AA094;
+    line-height: 30px;
+    top: 25%;
+}
+.admin-side-toggle:hover{
+    background-color: #5FB878;
+}
+.admin-login-box{
+    width: 185px; height: 70px; position: relative;
+}
+
+
 /* 适配多设备 */
 @media screen and (max-width: 750px) {
     .layui-main{width: auto; margin: 0 10px;}

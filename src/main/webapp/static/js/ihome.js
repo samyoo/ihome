@@ -2,11 +2,6 @@
  * layui 组件
  * @type {any}
  */
-var layer = layui.layer
-    ,form = layui.form()
-    ,util = layui.util
-    ,element = layui.element();
-
 
 //时间格式化
 Date.prototype.Format = function (fmt) { //author: meizz
@@ -269,19 +264,9 @@ common.photos = function(id){
     });
 }
 
+
+
 $(function () {
 
 
-    //layer.msg('Hello World');
-    common.msg("1243")
-    element.init();
-
 });
-/*
-var layer;
-layui.use(['layer', 'form','element'], function(){
-    layer = layui.layer;
-        //,form = layui.form();
-
-
-});*/

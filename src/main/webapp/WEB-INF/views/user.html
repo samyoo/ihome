@@ -1,0 +1,154 @@
+<#include "/WEB-INF/views/common/layout/___mainlayout.html" />
+<#assign pageBreadCrumbs>
+
+</#assign>
+<#assign pageCss>
+
+</#assign>
+<!-- 加载某个页面所需要的JavaScript脚本文件 -->
+<#assign pageJavascript>
+    <script type="text/javascript">
+
+    </script>
+</#assign>
+<@mainlayout pageJavascript=pageJavascript pageBreadCrumbs=pageBreadCrumbs >
+
+<blockquote class="layui-elem-quote">
+    <a href="javascript:;" class="layui-btn layui-btn-small" id="add">
+        <i class="layui-icon"></i> 添加信息
+    </a>
+    <a href="#" class="layui-btn layui-btn-small">
+        <i class="layui-icon"></i> 导入信息
+    </a>
+    <a href="#" class="layui-btn layui-btn-small">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> 导出信息
+    </a>
+    <a href="javascript:;" class="layui-btn layui-btn-small" id="search">
+        <i class="layui-icon"></i> 搜索
+    </a>
+</blockquote>
+
+<fieldset class="layui-elem-field">
+    <legend>数据列表</legend>
+    <div class="layui-field-box">
+        <table class="site-table table-hover">
+            <thead>
+            <tr>
+                <th>所属分类</th>
+                <th>标题</th>
+                <th>作者</th>
+                <th>创建时间</th>
+                <th>浏览量</th>
+                <th>状态</th>
+                <th>排序值</th>
+                <th>置顶</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Layui</td>
+                <td>
+                    <a href="/manage/article_edit_1">演示站点发布成功啦。</a>
+                </td>
+                <td>Beginner</td>
+                <td>2016-11-16 11:50</td>
+                <td>1298</td>
+                <td>正常</td>
+                <td>99</td>
+                <td style="text-align:center;"><i class="layui-icon" style="color:green;"></i></td>
+                <td>
+                    <a href="/detail-1" target="_blank" class="layui-btn layui-btn-normal layui-btn-mini">预览</a>
+                    <a href="/manage/article_edit_1" class="layui-btn layui-btn-mini">编辑</a>
+                    <a href="javascript:;" data-id="1" data-opt="del"
+                       class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Layui</td>
+                <td>
+                    <a href="/manage/article_edit_19">神5飞天震寰宇</a>
+                </td>
+                <td>就是我</td>
+                <td>2016-11-18 10:18</td>
+                <td>74</td>
+                <td>正常</td>
+                <td>0</td>
+                <td style="text-align:center;"><i class="layui-icon" style="color:green;"></i></td>
+                <td>
+                    <a href="/detail-19" target="_blank">预览</a>
+                    <a href="/manage/article_edit_19">编辑</a>
+                    <a href="javascript:;" data-id="19" data-opt="del">删除</a>
+                </td>
+            </tr>
+            <tr>
+                <td>C#</td>
+                <td>
+                    <a href="/manage/article_edit_8">验证（C#和正则表达式）</a>
+                </td>
+                <td>Beginner</td>
+                <td>2016-11-17 14:20</td>
+                <td>144</td>
+                <td>正常</td>
+                <td>0</td>
+                <td style="text-align:center;"><i class="layui-icon" style="color:green;"></i></td>
+                <td>
+                    <a href="/detail-8" target="_blank">预览</a>
+                    <a href="/manage/article_edit_8">编辑</a>
+                    <a href="javascript:;" data-id="8" data-opt="del">删除</a>
+                </td>
+            </tr>
+            <tr>
+                <td>博客</td>
+                <td>
+                    <a href="/manage/article_edit_4">博客的功能点收集，欢迎留言。</a>
+                </td>
+                <td>Beginner</td>
+                <td>2016-11-16 16:43</td>
+                <td>663</td>
+                <td>草稿</td>
+                <td>0</td>
+                <td style="text-align:center;"><i class="layui-icon" style="color:green;"></i></td>
+                <td>
+                    <a href="/detail-4" target="_blank">预览</a>
+                    <a href="/manage/article_edit_4">编辑</a>
+                    <a href="javascript:;" data-id="4" data-opt="del">删除</a>
+                </td>
+            </tr>
+            <tr>
+                <td>C#</td>
+                <td>
+                    <a href="/manage/article_edit_20">1发顺丰范德萨</a>
+                </td>
+                <td>31</td>
+                <td>2016-11-18 13:22</td>
+                <td>138</td>
+                <td>草稿</td>
+                <td>213</td>
+                <td style="text-align:center;"><i class="layui-icon" style="color:red;">ဇ</i></td>
+                <td>
+                    <a href="/detail-20" target="_blank">预览</a>
+                    <a href="/manage/article_edit_20">编辑</a>
+                    <a href="javascript:;" data-id="20" data-opt="del">删除</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="admin-table-page">
+            <div id="page" class="page">
+                <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-0">
+                        <span class="layui-laypage-curr">
+                            <em class="layui-laypage-em"></em><em>1</em></span>
+                    <a href="javascript:;" data-page="2">2</a>
+                    <a href="javascript:;" data-page="3">3</a>
+                    <a href="javascript:;" data-page="4">4</a><a href="javascript:;" data-page="5">5</a>
+                    <span>…</span>
+                    <a href="javascript:;" class="layui-laypage-last" title="尾页" data-page="25">末页</a>
+                    <a href="javascript:;" class="layui-laypage-next" data-page="2">下一页</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+</@mainlayout>

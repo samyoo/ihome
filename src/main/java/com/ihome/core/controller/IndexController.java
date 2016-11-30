@@ -11,6 +11,9 @@ public class IndexController extends Controller {
 	public void index() {
 		render("index.html");
 	}
+	public void user() {
+		render("user.html");
+	}
 
 	public void login(){
         render("login.html");

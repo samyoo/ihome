@@ -15,28 +15,17 @@
         <!-- Css BEGIN -->
         <#include "/WEB-INF/views/common/inc/_css.html" />
         <!-- Css END -->
+
         <!-- JavaScript BEGIN -->
         <#include "/WEB-INF/views/common/inc/_js.html" />
         <!-- JavaScript END -->
     </head>
     <body>
-    <div class="layui-layout layui-layout-admin">
+    <div class="admin-main">
 
-        <!-- navbar-top BEGIN -->
-        <#include "/WEB-INF/views/common/inc/_navbartop.html" />
-        <!-- navbar-top END-->
 
-        <!-- sidebar-nav BEGIN-->
-        <#include "/WEB-INF/views/common/inc/_sidebarnav.html" />
-        <!-- sidebar-nav END-->
-
-        <!-- PAGE CONTENT BEGINS -->
         <#nested />
-        <!-- PAGE CONTENT ENDS -->
 
-        <!-- footer BEGIN-->
-        <#include "/WEB-INF/views/common/inc/_footer.html" />
-        <!-- footer END-->
     </div>
     </body>
     </html>
