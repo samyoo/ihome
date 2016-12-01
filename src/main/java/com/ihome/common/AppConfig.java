@@ -1,8 +1,8 @@
 package com.ihome.common;
 
-import com.ihome.common.interceptor.UserInterceptor;
 import com.ihome.common.plugin.SchedulerPlugin;
-import com.ihome.core.controller.IndexController;
+import com.ihome.core.controller.admin.AdminController;
+import com.ihome.core.controller.admin.IndexController;
 import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.ext.interceptor.SessionInViewInterceptor;
@@ -10,7 +10,6 @@ import com.jfinal.ext.plugin.config.ConfigKit;
 import com.jfinal.ext.plugin.config.ConfigPlugin;
 import com.jfinal.ext.plugin.tablebind.AutoTableBindPlugin;
 import com.jfinal.ext.plugin.tablebind.ParamNameStyles;
-import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.activerecord.SqlReporter;
 import com.jfinal.plugin.activerecord.tx.TxByMethods;
 import com.jfinal.plugin.druid.DruidPlugin;
@@ -52,7 +51,9 @@ public class AppConfig extends JFinalConfig {
      * 配置路由
      */
     public void configRoute(Routes me) {
-        me.add("/", IndexController.class);
+
+        me.add("/admin", IndexController.class);
+        me.add("/admin/admin", AdminController.class);
 
     }
 

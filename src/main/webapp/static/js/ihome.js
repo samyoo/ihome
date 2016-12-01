@@ -100,6 +100,21 @@ common.get = function(url, data, success, error) {
     });
 };
 
+common.table = function (list,tlp,table) {
+    var html  = "";
+    table = table || ".site-table";
+    for(var i in list){
+        var obj  = list[i];
+        obj.index = parseInt(i)+1;
+        html += tlp.Format(obj);
+    }
+    if(html == ""){
+        var cols = $("thead th",$(table)).length;
+        html = "<tr><td colspan='"+cols+"'>暂无数据</td></tr>";
+    }
+    $("tbody",$(table)).html(html);
+}
+
 /**
  * 获取日期
  * @param i
@@ -155,7 +170,7 @@ common.getYearWeek = function () {
  * @param msg
  */
 common.msg = function (msg) {
-    layer.msg(msg);
+    parent.layer.msg(msg);
 }
 
 /**
@@ -166,7 +181,7 @@ common.msg = function (msg) {
  * @param title
  */
 common.alert = function (msg, btn, callback, title) {
-    var index = layer.open({
+    var index = parent.layer.open({
         title: title || '提示',
         content: msg,
         className: 'test',
@@ -185,7 +200,7 @@ common.alert = function (msg, btn, callback, title) {
  * @param title
  */
 common.confirm = function (msg,callback,callback2,btn,title) {
-    var index = layer.confirm(msg, {
+    var index = parent.layer.confirm(msg, {
             title: title || '提示',
             btn: btn || ['确定', '取消'], //按钮
             //yes:callback,
@@ -200,13 +215,16 @@ var _loading_index = 0;
  * 加载层
  */
 common.loading = function () {
-    _loading_index = layer.load();
+    //_loading_index = layer.load();
+    _loading_index = parent.layer.load(1, {
+        shade: [0.1, '#fff'] //0.1透明度的白色背景
+    });
 };
 /**
  * 停止加载
  */
 common.stop = function () {
-    layer.close(_loading_index);
+    parent.layer.close(_loading_index);
 };
 
 /**

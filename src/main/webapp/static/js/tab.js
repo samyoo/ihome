@@ -2,7 +2,7 @@
  * Created by sam on 16-11-30.
  */
 layui.config({
-    base: 'static/js/'
+    base: '../static/js/'
 }).define(['element', 'common'], function(exports) {
     "use strict";
 

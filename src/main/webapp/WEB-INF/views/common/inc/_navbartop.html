@@ -2,14 +2,14 @@
 <div class="layui-header header header-demo">
     <div class="layui-main">
         <a class="logo" href="/">
-            <img src="static/img/logo-1.png" alt="layui">
+            <img src="${contextPath}/static/img/logo-1.png" alt="layui">
         </a>
         <ul class="layui-nav">
             <li class="layui-nav-item ">
-                <a href="/doc/">admin</a>
+                <a href="${contextPath}/admin/index">${session['LOGIN_ADMIN'].acc}</a>
             </li>
             <li class="layui-nav-item ">
-                <a href="/demo/">设置</a>
+                <a href="${contextPath}/admin/logout">退出</a>
             </li>
         </ul>
     </div>

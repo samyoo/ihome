@@ -1,17 +1,18 @@
 <#include "/WEB-INF/views/common/layout/___mainlayout.html" />
-<#assign pageBreadCrumbs>
-
-</#assign>
 <#assign pageCss>
 
 </#assign>
 <!-- 加载某个页面所需要的JavaScript脚本文件 -->
 <#assign pageJavascript>
     <script type="text/javascript">
-
+        $(function () {
+            $("#add").click(function () {
+                common.loading()
+            })
+        })
     </script>
 </#assign>
-<@mainlayout pageJavascript=pageJavascript pageBreadCrumbs=pageBreadCrumbs >
+<@mainlayout pageJavascript=pageJavascript  pageCss=pageCss>
 
 <blockquote class="layui-elem-quote">
     <a href="javascript:;" class="layui-btn layui-btn-small" id="add">
