@@ -18,23 +18,69 @@ public class AdminController extends Controller {
 
     public void index() {
 
-        render("user.html");
+       /* if(Constants.HTTP_GET.equals(getRequest().getMethod())){
+            render("list.html");
+        }else{
+            int page = getParaToInt("page", Constants.DEFAULT_PAGE);
+            int size = getParaToInt("pageSize",Constants.DEFAULT_SIZE);
+
+            String tel = getPara("tel");
+            String name = getPara("name");
+            ParamVo vo = new ParamVo(page,size);
+            vo.setTel(tel);
+            vo.setName(name);
+
+            Page<Admin> list = Admin.DAO.getPage(vo);
+
+            renderJson(JsonUtil.getData(list));
+        }*/
 	}
 
     public void list(){
 
-        int page = getParaToInt("page", Constants.DEFAULT_PAGE);
-        int size = getParaToInt("pageSize",Constants.DEFAULT_SIZE);
+        if(Constants.HTTP_GET.equals(getRequest().getMethod())){
+            render(Constants.PAGE_LIST);
+        }else{
+            int page = getParaToInt("page", Constants.DEFAULT_PAGE);
+            int size = getParaToInt("pageSize",Constants.DEFAULT_SIZE);
 
-        String tel = getPara("tel");
-        String name = getPara("name");
-        ParamVo vo = new ParamVo(page,size);
-        vo.setTel(tel);
-        vo.setName(name);
+            String tel = getPara("tel");
+            String name = getPara("name");
+            ParamVo vo = new ParamVo(page,size);
+            vo.setTel(tel);
+            vo.setName(name);
 
-        Page<Admin> list = Admin.DAO.getPage(vo);
+            Page<Admin> list = Admin.DAO.getPage(vo);
 
-        renderJson(JsonUtil.getData(list));
+            renderJson(JsonUtil.getData(list));
+        }
+
+    }
+
+    public void save(){
+        Admin admin = getModel(Admin.class);
+
+        System.out.println(admin);
+
+        renderJson(JsonUtil.getSucc("ok"));
+    }
+
+    public void update(){
+        Admin admin = getModel(Admin.class);
+
+        System.out.println(admin);
+
+        renderJson(JsonUtil.getSucc("ok"));
+    }
+
+    public void updateStatus(){
+        int id = getParaToInt("id");
+        int status = getParaToInt("status");
+        if(Admin.DAO.updateStatus(id,status)){
+            renderJson(JsonUtil.getEditSucc());
+        }else{
+            renderJson(JsonUtil.getEditFail());
+        }
     }
 
 }

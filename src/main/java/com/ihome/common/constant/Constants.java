@@ -8,6 +8,15 @@ public class Constants {
     public static final int DEFAULT_PAGE = 1;
     public static final int DEFAULT_SIZE = 10;
 
+    public static final String HTTP_GET = "GET";
+
+    public static final String PAGE_LIST = "list.html";
+    public static final String PAGE_INDEX = "index.html";
+    public static final String PAGE_ADD = "add.html";
+    public static final String PAGE_EDIT = "edit.html";
+    public static final String PAGE_LOGIN = "login.html";
+    public static final String PAGE_MAIN = "main.html";
+
     /**
      * 登录后台用户
      */

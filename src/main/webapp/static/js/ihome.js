@@ -100,20 +100,44 @@ common.get = function(url, data, success, error) {
     });
 };
 
-common.table = function (list,tlp,table) {
-    var html  = "";
+common.table = function (json,tpl,table) {
+    tpl = tpl || "_tpl";
     table = table || ".site-table";
-    for(var i in list){
-        var obj  = list[i];
-        obj.index = parseInt(i)+1;
-        html += tlp.Format(obj);
-    }
-    if(html == ""){
-        var cols = $("thead th",$(table)).length;
-        html = "<tr><td colspan='"+cols+"'>暂无数据</td></tr>";
-    }
+    var html = layui.laytpl($("#"+tpl).html()).render(json);
     $("tbody",$(table)).html(html);
-}
+};
+
+common.page = function (json,callback,id) {
+    layui.laypage({
+        cont: id||'page',
+        pages: json.data.totalPage,
+        curr:  json.data.pageNumber,
+        groups: 5,
+        jump: callback
+    });
+};
+var param =  {};
+common.getData = function (url) {
+        //param = param || {};
+        common.post(url,param,function (json) {
+            common.table(json);
+
+            common.page(json,function (obj,first) {
+                if(!first){
+                    param.page = obj.curr;
+                    common.getData(url);
+                }
+            });
+        });
+};
+
+common.search = function () {
+    var form = layui.form();
+    form.on('submit(search)', function (data) {
+        param = data.field;
+        common.getData(url);
+    });
+};
 
 /**
  * 获取日期
@@ -200,12 +224,13 @@ common.alert = function (msg, btn, callback, title) {
  * @param title
  */
 common.confirm = function (msg,callback,callback2,btn,title) {
-    var index = parent.layer.confirm(msg, {
+    var index = layer.confirm(msg, {
             title: title || '提示',
             btn: btn || ['确定', '取消'], //按钮
             //yes:callback,
             cancel:callback2 //右上角关闭回调
         },callback,callback2);
+    return index;
 };
 
 
@@ -240,6 +265,7 @@ common.open = function (content, btn,callback, title,area) {
         area: area||'360px',
         content: content,
         title: title || '提示信息',
+        //title: false,
         btn: btn || ['确定', '取消'], //按钮
         yes: callback || function () {
             layer.close(index);

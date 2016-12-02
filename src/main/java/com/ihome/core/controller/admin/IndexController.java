@@ -27,7 +27,7 @@ public class IndexController extends Controller {
     @Before(AdminInterceptor.class)
     public void index() {
 
-        render("index.html");
+        render(Constants.PAGE_INDEX);
 	}
 
     @Before(AdminInterceptor.class)
@@ -52,42 +52,44 @@ public class IndexController extends Controller {
     @Before(AdminInterceptor.class)
 	public void main() {
 
-		render("main.html");
+		render(Constants.PAGE_MAIN);
 	}
 
 	public void login(){
-        render("login.html");
+        if(Constants.HTTP_GET.equals(getRequest().getMethod())){
+            render(Constants.PAGE_LOGIN);
+        }else{
+
+            String acc = getPara("acc");
+            String pwd = getPara("pwd");
+
+            Admin admin = Admin.DAO.findByAcc(acc);
+            if(admin != null){
+                String aPwd = admin.getStr(Admin.ATTR.pwd);
+                if(aPwd.equals(MD5Util.getMD5Pwd(pwd))){
+                    setSessionAttr(Constants.LOGIN_ADMIN,admin);
+
+                    admin.set(Admin.ATTR.loginIp, SessionUtil.getIpAddr(getRequest()))
+                            .set(Admin.ATTR.lastLoginIp,admin.getStr(Admin.ATTR.loginIp))
+                            .set(Admin.ATTR.loginTime,new Date())
+                            .set(Admin.ATTR.lastLoginTime,admin.getDate(Admin.ATTR.loginTime))
+                            .update();
+
+                    renderJson(JsonUtil.getSucc("登录成功"));
+                }else {
+                    renderJson(JsonUtil.getFail("登录失败"));
+                }
+            }else {
+                renderJson(JsonUtil.getFail("登录失败"));
+            }
+        }
     }
 
     public void logout(){
         removeSessionAttr(Constants.LOGIN_ADMIN);
-        render("login.html");
+        render(Constants.PAGE_LOGIN);
     }
 
-    public void home(){
-        String acc = getPara("acc");
-        String pwd = getPara("pwd");
-
-        Admin admin = Admin.DAO.findByAcc(acc);
-        if(admin != null){
-            String apwd = admin.getStr(Admin.ATTR.pwd);
-            if(apwd.equals(MD5Util.getMD5Pwd(pwd))){
-                setSessionAttr(Constants.LOGIN_ADMIN,admin);
-
-                admin.set(Admin.ATTR.loginIp, SessionUtil.getIpAddr(getRequest()))
-                        .set(Admin.ATTR.lastLoginIp,admin.getStr(Admin.ATTR.loginIp))
-                        .set(Admin.ATTR.loginTime,new Date())
-                        .set(Admin.ATTR.lastLoginTime,admin.getDate(Admin.ATTR.loginTime))
-                        .update();
-
-                renderJson(JsonUtil.getSucc("登录成功"));
-            }else {
-                renderJson(JsonUtil.getFail("登录失败"));
-            }
-        }else {
-                renderJson(JsonUtil.getFail("登录失败"));
-        }
-    }
 }
 
 

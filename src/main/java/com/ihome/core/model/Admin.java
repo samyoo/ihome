@@ -3,6 +3,7 @@ package com.ihome.core.model;
 
 import com.ihome.common.utils.StrUtil;
 import com.ihome.common.vo.ParamVo;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Page;
 
@@ -30,6 +31,7 @@ public class Admin extends Model<Admin> {
         String lastLoginTime = "lastLoginTime";
         String loginIp = "loginIp";
         String lastLoginIp = "lastLoginIp";
+        String status = "status";
     }
 
     /**
@@ -50,11 +52,15 @@ public class Admin extends Model<Admin> {
         StringBuilder sql = new StringBuilder();
         sql.append("from t_admin where 1=1 ");
         if(StrUtil.isNotBlank(vo.getTel())){
-            sql.append(" and tel = '").append(vo.getTel()).append("' ");
+            sql.append(" and tel like '%").append(vo.getTel()).append("%' ");
         }
         if(StrUtil.isNotBlank(vo.getName())){
-            sql.append(" and name = '").append(vo.getName()).append("' ");
+            sql.append(" and name like '%").append(vo.getName()).append("%' ");
         }
         return this.paginate(vo.getPage(),vo.getSize(),"select * ",sql.toString());
+    }
+
+    public boolean updateStatus(int id,int status){
+        return Db.update("update t_admin set status = ? where id = ? ",status,id)>0;
     }
 }

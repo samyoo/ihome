@@ -85,7 +85,7 @@
                 data.field.pwd = $.md5(data.field.pwd);
                 $.ajax({
                     type: "post",
-                    url: "home",
+                    url: "login",
                     data: data.field,
                     datatype: "json",
                     success: function (msg) {

@@ -1,0 +1,208 @@
+<#include "/WEB-INF/views/common/layout/___mainlayout.html" />
+
+<#assign pageCss>
+
+</#assign>
+<!-- 加载某个页面所需要的JavaScript脚本文件 -->
+<#assign pageJavascript>
+    <script type="text/javascript">
+        var url = "list";
+
+        $(function () {
+            var form = layui.form();
+
+            //页面加载成功后首次请求数据
+            common.getData(url);
+            //搜索
+            common.search();
+
+            $("#addBtn").click(function () {
+               /* common.open($("#add").html(), ["保存", "取消"], function () {
+
+                })*/
+
+
+                var index = layer.open({
+                    type: 1,
+                    content: $("#add").html(),
+                    title:  '添加管理员',
+                    btn: ['确定','取消'], //按钮
+                    yes: function (a,b) {
+                        //console.log(a);
+                        //console.log(b);
+                        /*form.on('submit(filter)', function(data){
+                            console.log(data)
+                        })*/
+
+                        var a = $('#aab',$(b)).serialize();
+                        console.log(a);
+
+                    },
+                    success:function (a,b) {
+                       /* console.log(a)
+                        //console.log(b)
+                        console.log(a.context)
+                        $(".layui-layer-btn > a",$(a)).eq(0).attr("lay-submit",'0');
+                        $(".layui-layer-btn > a",$(a)).eq(0).attr("lay-filter","filter");
+                        form.render();
+                        console.log(form);*/
+                    }
+                });
+            })
+
+        });
+
+
+        function upStatus(e) {
+            var id = $(e).attr("data-id");
+            var status = $(e).attr("data-status");
+            var msg = "";
+            if (status == 1) {
+                status = 0;
+                msg = "确定禁用该管理员？";
+            } else {
+                status = 1;
+                msg = "确定启用该管理员？";
+            }
+            var index = common.confirm(msg, function () {
+                common.post("updateStatus", {id: id, status: status}, function (json) {
+                    common.close(index);
+                    common.msg(json.msg);
+                    setTimeout(function () {
+                        common.getData(url);
+                    }, 1000)
+                })
+            })
+        }
+
+    </script>
+</#assign>
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss >
+
+<blockquote class="layui-elem-quote">
+    <a href="javascript:;" class="layui-btn layui-btn-small" id="addBtn">
+        <i class="layui-icon">&#xe61f;</i> 添加信息
+    </a>
+</blockquote>
+
+<fieldset class="layui-elem-field">
+    <legend>数据列表</legend>
+    <div class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">手机号码</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="tel" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">管理员名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="name" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn" lay-submit lay-filter="search">
+                    <i class="layui-icon">&#xe615;</i> 搜索
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="layui-field-box">
+        <table class="site-table table-hover">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>帐号</th>
+                <th>手机</th>
+                <th>管理员名称</th>
+                <th>最后登录时间</th>
+                <th>最后登录IP</th>
+                <th>注册时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <script id="_tpl" type="text/html">
+            {{#  layui.each(d.data.list, function(index, item){ }}
+            <tr>
+                <td>{{ (d.data.pageNumber-1)*d.data.pageSize+1+index }}</td>
+                <td>{{ item.acc }}</td>
+                <td>{{ item.tel }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.lastLoginTime }}</td>
+                <td>{{ item.lastLoginIp }}</td>
+                <td>{{ item.regTime }}</td>
+                <td>
+                    <a href="/admin/edit/{{ item.id }}" class="layui-btn layui-btn-mini">编辑</a>
+                    {{# if(item.status==1){ }}
+                    <a href="javascript:;" data-id="{{ item.id }}" data-status="{{ item.status }}"
+                       class="layui-btn layui-btn-danger layui-btn-mini " onclick="upStatus(this)">禁用</a>
+                    {{# }else{ }}
+                    <a href="javascript:;" data-id="{{ item.id }}" data-status="{{ item.status }}"
+                       class="layui-btn layui-btn-normal layui-btn-mini " onclick="upStatus(this)">启用</a>
+                    {{# } }}
+                </td>
+            </tr>
+            {{#  }); }}
+            {{#  if(d.data.list.length === 0){ }}
+            <tr>
+                <td colspan=" {{ $('.site-table thead th').length }}">暂无数据</td>
+            </tr>
+            {{#  } }}
+        </script>
+
+        <div class="admin-table-page">
+            <div id="page" class="page"></div>
+        </div>
+
+        <div id="add" style="display: none;">
+            <fieldset class="layui-elem-field" style="margin: 5px">
+                <legend>管理员</legend>
+                <form class="layui-form layui-form-pane" id="aab">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">帐号:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="acc" lay-verify="required" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">手机:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="tel" lay-verify="phone" autocomplete="off" class="layui-input"
+                                       maxlength="11">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">名称:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="name" lay-verify="required" autocomplete="off"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                   <!-- <div class="layui-form-item layui-layer-btn" style="margin-bottom: 0px">
+                        <div class="layui-inline ">
+                            <button class="layui-btn  layui-btn-normal" lay-submit lay-filter="search">确定</button>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="reset"  class="layui-btn layui-btn-primary" >取消</button>
+                        </div>
+                    </div>-->
+                </form>
+            </fieldset>
+        </div>
+    </div>
+    </div>
+</fieldset>
+
+</@mainlayout>
