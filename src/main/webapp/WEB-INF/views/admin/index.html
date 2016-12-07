@@ -46,7 +46,25 @@
                 tab.tabAdd(data.field);
             });
 
+            var header = $('.layui-header');
+            var side = $('.layui-side');
+
+            header.find('.logo').unbind('click').click(function(){
+                var min = 'layui-layout-admin-min';
+                if(header.parent().hasClass(min)){
+                    header.parent().removeClass(min);
+                }else{
+                    header.parent().addClass(min);
+                }
+            });
+
+            side.find('.layui-nav-item ').click(function() {
+                if (header.parent().hasClass('layui-layout-admin-min')) {
+                    header.find('.logo').click();
+                }
+            });
         });
+        
 
     </script>
 </head>

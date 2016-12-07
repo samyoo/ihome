@@ -323,6 +323,11 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
     width: 185px; height: 70px; position: relative;
 }
 
+.layui-layout-admin-min .layui-side{width:50px;}
+.layui-layout-admin-min .layui-body, .layui-layout-admin-min .layui-footer{left:50px;}
+.layui-layout-admin-min .layui-side .layui-side-scroll ul li.layui-nav-item > a span,
+.layui-layout-admin-min .layui-side .layui-side-scroll ul li.layui-nav-item > dl {display: none; padding: 0 3px;}
+
 
 /* 适配多设备 */
 @media screen and (max-width: 750px) {

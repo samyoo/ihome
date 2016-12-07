@@ -6,52 +6,56 @@
 <!-- 加载某个页面所需要的JavaScript脚本文件 -->
 <#assign pageJavascript>
     <script type="text/javascript">
-        var url = "list";
+         url = "list";
 
         $(function () {
             var form = layui.form();
 
             //页面加载成功后首次请求数据
-            common.getData(url);
+            common.getData();
+
             //搜索
-            common.search();
+            form.on('submit(search)', function (data) {
+                common.getData(data.field);
+                return false;
+            });
 
-            $("#addBtn").click(function () {
-               /* common.open($("#add").html(), ["保存", "取消"], function () {
+            //添加
+            form.on("submit(add)",function () {
+                var html = common.laytpl("_open");
+                var index = common.openSave(html,'添加管理员',function () {
+                    var form = layui.form();
+                    form.render();
+                    form.on('submit(save)', function(data){
+                        common.post("save",data.field,function (json) {
+                            common.msg(json.msg);
+                            common.close(index);
+                            common.reload();
+                        });
+                        return false;
+                    });
 
-                })*/
-
-
-                var index = layer.open({
-                    type: 1,
-                    content: $("#add").html(),
-                    title:  '添加管理员',
-                    btn: ['确定','取消'], //按钮
-                    yes: function (a,b) {
-                        //console.log(a);
-                        //console.log(b);
-                        /*form.on('submit(filter)', function(data){
-                            console.log(data)
-                        })*/
-
-                        var a = $('#aab',$(b)).serialize();
-                        console.log(a);
-
-                    },
-                    success:function (a,b) {
-                       /* console.log(a)
-                        //console.log(b)
-                        console.log(a.context)
-                        $(".layui-layer-btn > a",$(a)).eq(0).attr("lay-submit",'0');
-                        $(".layui-layer-btn > a",$(a)).eq(0).attr("lay-filter","filter");
-                        form.render();
-                        console.log(form);*/
-                    }
                 });
-            })
+            });
 
         });
 
+         function edit(e) {
+             var data = JSON.parse($(e).attr("data-data"));
+             var html = common.laytpl("_open",data);
+             var index = common.openSave(html,'修改管理员',function () {
+                 var form = layui.form();
+                 form.render();
+                 form.on('submit(save)', function(data){
+                     common.post("update",data.field,function (json) {
+                         common.msg(json.msg);
+                         common.close(index);
+                         common.reload();
+                     });
+                     return false;
+                 });
+             });
+         }
 
         function upStatus(e) {
             var id = $(e).attr("data-id");
@@ -68,9 +72,7 @@
                 common.post("updateStatus", {id: id, status: status}, function (json) {
                     common.close(index);
                     common.msg(json.msg);
-                    setTimeout(function () {
-                        common.getData(url);
-                    }, 1000)
+                    common.reload();
                 })
             })
         }
@@ -78,12 +80,6 @@
     </script>
 </#assign>
 <@mainlayout pageJavascript=pageJavascript pageCss=pageCss >
-
-<blockquote class="layui-elem-quote">
-    <a href="javascript:;" class="layui-btn layui-btn-small" id="addBtn">
-        <i class="layui-icon">&#xe61f;</i> 添加信息
-    </a>
-</blockquote>
 
 <fieldset class="layui-elem-field">
     <legend>数据列表</legend>
@@ -102,8 +98,12 @@
                 </div>
             </div>
             <div class="layui-inline">
-                <button class="layui-btn" lay-submit lay-filter="search">
+                <input type="hidden" name="page" id="_pageNum">
+                <button class="layui-btn" lay-submit lay-filter="search" id="search">
                     <i class="layui-icon">&#xe615;</i> 搜索
+                </button>
+                <button class="layui-btn" lay-submit lay-filter="add">
+                    <i class="layui-icon">&#xe61f;</i> 添加
                 </button>
             </div>
         </div>
@@ -126,83 +126,79 @@
             </tbody>
         </table>
 
-        <script id="_tpl" type="text/html">
-            {{#  layui.each(d.data.list, function(index, item){ }}
-            <tr>
-                <td>{{ (d.data.pageNumber-1)*d.data.pageSize+1+index }}</td>
-                <td>{{ item.acc }}</td>
-                <td>{{ item.tel }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.lastLoginTime }}</td>
-                <td>{{ item.lastLoginIp }}</td>
-                <td>{{ item.regTime }}</td>
-                <td>
-                    <a href="/admin/edit/{{ item.id }}" class="layui-btn layui-btn-mini">编辑</a>
-                    {{# if(item.status==1){ }}
-                    <a href="javascript:;" data-id="{{ item.id }}" data-status="{{ item.status }}"
-                       class="layui-btn layui-btn-danger layui-btn-mini " onclick="upStatus(this)">禁用</a>
-                    {{# }else{ }}
-                    <a href="javascript:;" data-id="{{ item.id }}" data-status="{{ item.status }}"
-                       class="layui-btn layui-btn-normal layui-btn-mini " onclick="upStatus(this)">启用</a>
-                    {{# } }}
-                </td>
-            </tr>
-            {{#  }); }}
-            {{#  if(d.data.list.length === 0){ }}
-            <tr>
-                <td colspan=" {{ $('.site-table thead th').length }}">暂无数据</td>
-            </tr>
-            {{#  } }}
-        </script>
-
         <div class="admin-table-page">
             <div id="page" class="page"></div>
         </div>
-
-        <div id="add" style="display: none;">
-            <fieldset class="layui-elem-field" style="margin: 5px">
-                <legend>管理员</legend>
-                <form class="layui-form layui-form-pane" id="aab">
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">帐号:</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="acc" lay-verify="required" autocomplete="off"
-                                       class="layui-input">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">手机:</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="tel" lay-verify="phone" autocomplete="off" class="layui-input"
-                                       maxlength="11">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">名称:</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="name" lay-verify="required" autocomplete="off"
-                                       class="layui-input">
-                            </div>
-                        </div>
-                    </div>
-                   <!-- <div class="layui-form-item layui-layer-btn" style="margin-bottom: 0px">
-                        <div class="layui-inline ">
-                            <button class="layui-btn  layui-btn-normal" lay-submit lay-filter="search">确定</button>
-                        </div>
-                        <div class="layui-inline">
-                            <button type="reset"  class="layui-btn layui-btn-primary" >取消</button>
-                        </div>
-                    </div>-->
-                </form>
-            </fieldset>
-        </div>
-    </div>
     </div>
 </fieldset>
+
+<script id="_tpl" type="text/html">
+    {{#  layui.each(d.data.list, function(index, item){ }}
+    <tr>
+        <td>{{ (d.data.pageNumber-1)*d.data.pageSize+1+index }}</td>
+        <td>{{ item.acc }}</td>
+        <td>{{ item.tel }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.lastLoginTime }}</td>
+        <td>{{ item.lastLoginIp }}</td>
+        <td>{{ item.regTime }}</td>
+        <td>
+            <a href="javascript:;" class="layui-btn layui-btn-mini"
+               data-data='{{ JSON.stringify(item) }}' onclick="edit(this)">编辑</a>
+            {{# if(item.status==1){ }}
+            <a href="javascript:;" data-id="{{ item.id }}" data-status="{{ item.status }}"
+               class="layui-btn layui-btn-danger layui-btn-mini " onclick="upStatus(this)">禁用</a>
+            {{# }else{ }}
+            <a href="javascript:;" data-id="{{ item.id }}" data-status="{{ item.status }}"
+               class="layui-btn layui-btn-normal layui-btn-mini " onclick="upStatus(this)">启用</a>
+            {{# } }}
+        </td>
+    </tr>
+    {{#  }); }}
+    {{#  if(d.data.list.length === 0){ }}
+    <tr>
+        <td colspan=" {{ $('.site-table thead th').length }}">暂无数据</td>
+    </tr>
+    {{#  } }}
+</script>
+
+<script id="_open" type="text/html">
+    <fieldset class="layui-elem-field" style="margin: 5px">
+        <legend>管理员</legend>
+        <form class="layui-form layui-form-pane" id="aab">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">帐号:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="admin.acc" lay-verify="required" autocomplete="off"
+                               class="layui-input {{# if(d.acc){ }} layui-disabled {{# } }}" value="{{ d.acc||'' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">手机:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="admin.tel" lay-verify="phone" autocomplete="off"
+                               class="layui-input" maxlength="11" value="{{ d.tel||'' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">名称:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="admin.name" lay-verify="required" autocomplete="off"
+                               class="layui-input" value="{{ d.name||'' }}">
+                    </div>
+                </div>
+            </div>
+            <div style="display:none;">
+                <input type="hidden" name="admin.id" value="{{ d.id||''}}">
+                <button class="layui-btn  layui-btn-normal icon-save" lay-submit lay-filter="save">确定</button>
+            </div>
+        </form>
+    </fieldset>
+</script>
 
 </@mainlayout>

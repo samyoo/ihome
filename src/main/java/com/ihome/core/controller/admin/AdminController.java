@@ -9,33 +9,17 @@ import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 
+import java.util.Date;
+
 /**
  * IndexController
  */
 @Before(AdminInterceptor.class)
 public class AdminController extends Controller {
 
-
-    public void index() {
-
-       /* if(Constants.HTTP_GET.equals(getRequest().getMethod())){
-            render("list.html");
-        }else{
-            int page = getParaToInt("page", Constants.DEFAULT_PAGE);
-            int size = getParaToInt("pageSize",Constants.DEFAULT_SIZE);
-
-            String tel = getPara("tel");
-            String name = getPara("name");
-            ParamVo vo = new ParamVo(page,size);
-            vo.setTel(tel);
-            vo.setName(name);
-
-            Page<Admin> list = Admin.DAO.getPage(vo);
-
-            renderJson(JsonUtil.getData(list));
-        }*/
-	}
-
+    /**
+     * 列表
+     */
     public void list(){
 
         if(Constants.HTTP_GET.equals(getRequest().getMethod())){
@@ -57,22 +41,34 @@ public class AdminController extends Controller {
 
     }
 
+    /**
+     * 保存
+     */
     public void save(){
         Admin admin = getModel(Admin.class);
-
-        System.out.println(admin);
-
-        renderJson(JsonUtil.getSucc("ok"));
+        admin.set(Admin.ATTR.regTime,new Date());
+        if(admin.save()){
+            renderJson(JsonUtil.getAddSucc());
+        }else {
+            renderJson(JsonUtil.getAddFail());
+        }
     }
 
+    /**
+     * 修改
+     */
     public void update(){
         Admin admin = getModel(Admin.class);
-
-        System.out.println(admin);
-
-        renderJson(JsonUtil.getSucc("ok"));
+        if(admin.update()){
+            renderJson(JsonUtil.getEditSucc());
+        }else {
+            renderJson(JsonUtil.getEditFail());
+        }
     }
 
+    /**
+     * 修改状态
+     */
     public void updateStatus(){
         int id = getParaToInt("id");
         int status = getParaToInt("status");

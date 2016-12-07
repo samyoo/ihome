@@ -82,6 +82,13 @@ common.post = function(url, data, success, error) {
     });
 };
 
+/**
+ * get请求
+ * @param url
+ * @param data
+ * @param success
+ * @param error
+ */
 common.get = function(url, data, success, error) {
     common.loading();
     $.ajax({
@@ -100,13 +107,36 @@ common.get = function(url, data, success, error) {
     });
 };
 
-common.table = function (json,tpl,table) {
-    tpl = tpl || "_tpl";
-    table = table || ".site-table";
-    var html = layui.laytpl($("#"+tpl).html()).render(json);
-    $("tbody",$(table)).html(html);
+/**
+ * tpl模板解释
+ * @param id
+ * @param data
+ * @returns {*}
+ */
+common.laytpl = function (id,data) {
+    var _id = id || "_tpl";
+    var _data = data || {};
+    return layui.laytpl($("#"+_id).html()).render(_data);
 };
 
+/**
+ * table数据加载
+ * @param data
+ * @param id
+ * @param table
+ */
+common.table = function (data,id,table) {
+    var _table = table || ".site-table";
+    var html = common.laytpl(id,data);
+    $("tbody",$(_table)).html(html);
+};
+
+/**
+ * table分页
+ * @param json
+ * @param callback
+ * @param id
+ */
 common.page = function (json,callback,id) {
     layui.laypage({
         cont: id||'page',
@@ -116,27 +146,38 @@ common.page = function (json,callback,id) {
         jump: callback
     });
 };
-var param =  {};
-common.getData = function (url) {
-        //param = param || {};
-        common.post(url,param,function (json) {
-            common.table(json);
+//table 请求数据url
+var url = "";
+/**
+ * table请求数据
+ * @param data
+ */
+common.getData = function (data) {
+    var param = data || {};
+    common.post(url,param,function (json) {
+        common.table(json);
 
-            common.page(json,function (obj,first) {
-                if(!first){
-                    param.page = obj.curr;
-                    common.getData(url);
-                }
-            });
+        common.page(json,function (obj,first) {
+            if(!first){
+                $("#_pageNum").val(obj.curr);
+                common.reload();
+            }
         });
+    });
 };
 
-common.search = function () {
-    var form = layui.form();
-    form.on('submit(search)', function (data) {
-        param = data.field;
-        common.getData(url);
-    });
+/**
+ * 刷新数据
+ */
+common.reload = function (timeout) {
+    if(timeout){
+        setTimeout(function () {
+            $("#search").click();
+        }, timeout)
+    }else{
+        $("#search").click();
+    }
+
 };
 
 /**
@@ -270,6 +311,25 @@ common.open = function (content, btn,callback, title,area) {
         yes: callback || function () {
             layer.close(index);
         },
+    });
+};
+
+/**
+ * 弹出层添加、修改
+ * @param html
+ * @param title
+ * @param success
+ */
+common.openSave = function (html,title,success) {
+    return layer.open({
+        type: 1,
+        title:  title,
+        content: html,
+        success: success,
+        btn: ['保存', '关闭'],
+        yes: function(index, layero){
+            layero.find('.icon-save').click();
+        }
     });
 };
 

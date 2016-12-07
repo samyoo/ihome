@@ -91,10 +91,9 @@
                     success: function (msg) {
                         if (msg.code == "200") {
                             layer.msg("登录成功");
-                            setTimeout(function () {
+                            //setTimeout(function () {
                                 location.href = "../admin/index";
-
-                            }, 1000);
+                            //}, 1000);
                         }
                         else {
                             layer.close(loadIn);

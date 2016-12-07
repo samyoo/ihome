@@ -57,6 +57,7 @@ public class Admin extends Model<Admin> {
         if(StrUtil.isNotBlank(vo.getName())){
             sql.append(" and name like '%").append(vo.getName()).append("%' ");
         }
+        sql.append(" order by regTime desc ");
         return this.paginate(vo.getPage(),vo.getSize(),"select * ",sql.toString());
     }
 
