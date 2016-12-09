@@ -320,10 +320,11 @@ common.open = function (content, btn,callback, title,area) {
  * @param title
  * @param success
  */
-common.openSave = function (html,title,success) {
+common.openSave = function (html,title,success,area) {
     return layer.open({
         type: 1,
         title:  title,
+        area: area||'360px',
         content: html,
         success: success,
         btn: ['保存', '关闭'],

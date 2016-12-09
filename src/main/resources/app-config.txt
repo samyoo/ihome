@@ -2,7 +2,7 @@ devMode=true
 
 jdbc.driverClass=com.mysql.jdbc.Driver
 jdbc.url=jdbc:mysql://192.168.60.10:4006/ihome?useUnicode=true&characterEncoding=UTF-8&tinyInt1isBit=false&zeroDateTimeBehavior=round
-jdbc.username=maxscale
+jdbc.username=rtest
 jdbc.password=123456
 jdbc.filters=stat,wall
 

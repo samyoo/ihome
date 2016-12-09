@@ -5,11 +5,14 @@ import com.ihome.common.interceptor.AdminInterceptor;
 import com.ihome.common.utils.JsonUtil;
 import com.ihome.common.vo.ParamVo;
 import com.ihome.core.model.Admin;
+import com.ihome.core.model.Profile;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
+import com.oreilly.servlet.multipart.LimitedServletInputStream;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * IndexController
@@ -18,7 +21,7 @@ import java.util.Date;
 public class AdminController extends Controller {
 
     /**
-     * 列表
+     * 管理员列表
      */
     public void list(){
 
@@ -42,7 +45,7 @@ public class AdminController extends Controller {
     }
 
     /**
-     * 保存
+     * 管理员保存
      */
     public void save(){
         Admin admin = getModel(Admin.class);
@@ -55,7 +58,7 @@ public class AdminController extends Controller {
     }
 
     /**
-     * 修改
+     * 管理员修改
      */
     public void update(){
         Admin admin = getModel(Admin.class);
@@ -67,7 +70,7 @@ public class AdminController extends Controller {
     }
 
     /**
-     * 修改状态
+     * 管理员修改状态
      */
     public void updateStatus(){
         int id = getParaToInt("id");
@@ -75,6 +78,52 @@ public class AdminController extends Controller {
         if(Admin.DAO.updateStatus(id,status)){
             renderJson(JsonUtil.getEditSucc());
         }else{
+            renderJson(JsonUtil.getEditFail());
+        }
+    }
+
+    /**
+     * 系统设置列表
+     */
+    public void profile(){
+        if(Constants.HTTP_GET.equals(getRequest().getMethod())){
+            render("profile.html");
+        }else{
+            int page = getParaToInt("page", Constants.DEFAULT_PAGE);
+            int size = getParaToInt("pageSize",Constants.DEFAULT_SIZE);
+
+            String val = getPara("val");
+            String key = getPara("key");
+            ParamVo vo = new ParamVo(page,size);
+            vo.setVal(val);
+            vo.setName(key);
+
+            Page<Profile> list = Profile.DAO.getPage(vo);
+
+            renderJson(JsonUtil.getData(list));
+        }
+    }
+
+    /**
+     * 配置保存
+     */
+    public void savePro(){
+        Profile profile = getModel(Profile.class);
+        if(profile.save()){
+            renderJson(JsonUtil.getAddSucc());
+        }else {
+            renderJson(JsonUtil.getAddFail());
+        }
+    }
+
+    /**
+     * 配置修改
+     */
+    public void updatePro(){
+        Profile profile = getModel(Profile.class);
+        if(profile.update()){
+            renderJson(JsonUtil.getEditSucc());
+        }else {
             renderJson(JsonUtil.getEditFail());
         }
     }

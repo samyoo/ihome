@@ -1,7 +1,9 @@
 package com.ihome.common;
 
 import com.ihome.common.plugin.SchedulerPlugin;
+import com.ihome.core.controller.UploadController;
 import com.ihome.core.controller.admin.AdminController;
+import com.ihome.core.controller.admin.HouseController;
 import com.ihome.core.controller.admin.IndexController;
 import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
@@ -51,9 +53,10 @@ public class AppConfig extends JFinalConfig {
      * 配置路由
      */
     public void configRoute(Routes me) {
-
+        me.add("/upload", UploadController.class);
         me.add("/admin", IndexController.class);
         me.add("/admin/admin", AdminController.class);
+        me.add("/admin/house", HouseController.class);
 
     }
 
@@ -70,7 +73,7 @@ public class AppConfig extends JFinalConfig {
                 ConfigKit.getStr("jdbc.filters"));
         me.add(druidPlugin);
 
-        AutoTableBindPlugin arp = new AutoTableBindPlugin(druidPlugin,
+       AutoTableBindPlugin arp = new AutoTableBindPlugin(druidPlugin,
                 ParamNameStyles.lowerUnderlineModule("t"));
         arp.setShowSql(true);
         me.add(arp);

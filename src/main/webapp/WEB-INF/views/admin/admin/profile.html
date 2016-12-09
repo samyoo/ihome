@@ -1,0 +1,171 @@
+<#include "/WEB-INF/views/common/layout/___mainlayout.html" />
+
+<#assign pageCss>
+
+</#assign>
+<!-- 加载某个页面所需要的JavaScript脚本文件 -->
+<#assign pageJavascript>
+    <script type="text/javascript">
+         url = "profile";
+
+        $(function () {
+            var form = layui.form();
+
+            //页面加载成功后首次请求数据
+            common.getData();
+
+            //搜索
+            form.on('submit(search)', function (data) {
+                common.getData(data.field);
+                return false;
+            });
+
+            //添加
+            form.on("submit(add)",function () {
+                var html = common.laytpl("_open");
+                var index = common.openSave(html,'添加管理员',function () {
+                    var form = layui.form();
+                    form.render();
+                    form.on('submit(save)', function(data){
+                        common.post("savePro",data.field,function (json) {
+                            common.msg(json.msg);
+                            common.close(index);
+                            common.reload();
+                        });
+                        return false;
+                    });
+
+                });
+            });
+
+        });
+
+         function edit(e) {
+             var data = JSON.parse($(e).attr("data-data"));
+             var html = common.laytpl("_open",data);
+             var index = common.openSave(html,'修改管理员',function () {
+                 var form = layui.form();
+                 form.render();
+                 form.on('submit(save)', function(data){
+                     common.post("updatePro",data.field,function (json) {
+                         common.msg(json.msg);
+                         common.close(index);
+                         common.reload();
+                     });
+                     return false;
+                 });
+             });
+         }
+
+    </script>
+</#assign>
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss >
+
+<fieldset class="layui-elem-field">
+    <legend>数据列表</legend>
+    <div class="layui-form layui-form-pane">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">配置名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="key" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">配置参数</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="name" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <input type="hidden" name="page" id="_pageNum">
+                <button class="layui-btn" lay-submit lay-filter="search" id="search">
+                    <i class="layui-icon">&#xe615;</i> 搜索
+                </button>
+                <button class="layui-btn" lay-submit lay-filter="add">
+                    <i class="layui-icon">&#xe61f;</i> 添加
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="layui-field-box">
+        <table class="site-table table-hover">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>配置名称</th>
+                <th>配置参数</th>
+                <th>配置描述</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <div class="admin-table-page">
+            <div id="page" class="page"></div>
+        </div>
+    </div>
+</fieldset>
+
+<script id="_tpl" type="text/html">
+    {{#  layui.each(d.data.list, function(index, item){ }}
+    <tr>
+        <td>{{ (d.data.pageNumber-1)*d.data.pageSize+1+index }}</td>
+        <td>{{ item.key }}</td>
+        <td>{{ item.value }}</td>
+        <td>{{ item.description }}</td>
+        <td>
+            <a href="javascript:;" class="layui-btn layui-btn-mini"
+               data-data='{{ JSON.stringify(item) }}' onclick="edit(this)">编辑</a>
+        </td>
+    </tr>
+    {{#  }); }}
+    {{#  if(d.data.list.length === 0){ }}
+    <tr>
+        <td colspan=" {{ $('.site-table thead th').length }}">暂无数据</td>
+    </tr>
+    {{#  } }}
+</script>
+
+<script id="_open" type="text/html">
+    <fieldset class="layui-elem-field" style="margin: 5px">
+        <legend>系统参数</legend>
+        <form class="layui-form layui-form-pane" id="aab">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">配置名称:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="profile.key" lay-verify="required" autocomplete="off"
+                               class="layui-input {{# if(d.key){ }} layui-disabled {{# } }}" value="{{ d.key||'' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">配置参数:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="profile.value" lay-verify="required" autocomplete="off"
+                               class="layui-input"  value="{{ d.value||'' }}">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">描述:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="profile.description"  autocomplete="off"
+                               class="layui-input" value="{{ d.description||'' }}">
+                    </div>
+                </div>
+            </div>
+            <div style="display:none;">
+                <input type="hidden" name="profile.id" value="{{ d.id||''}}">
+                <button class="layui-btn  layui-btn-normal icon-save" lay-submit lay-filter="save">确定</button>
+            </div>
+        </form>
+    </fieldset>
+</script>
+
+</@mainlayout>

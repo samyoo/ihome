@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 610
-Source Server Version : 50711
-Source Host           : 192.168.60.10:3306
+Source Server         : 608
+Source Server Version : 50716
+Source Host           : 192.168.60.8:3306
 Source Database       : ihome
 
 Target Server Type    : MYSQL
-Target Server Version : 50711
+Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2016-12-05 11:31:14
+Date: 2016-12-09 16:09:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,14 +31,15 @@ CREATE TABLE `t_admin` (
   `loginIp` varchar(30) DEFAULT NULL,
   `lastLoginIp` varchar(30) DEFAULT NULL,
   `status` tinyint(2) DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `index_acc` (`acc`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_admin
 -- ----------------------------
-INSERT INTO `t_admin` VALUES ('1', 'admin', '05d5fcd9fd993a4fa50e930cbfb2b2bd', '123', 'admin', '2016-11-29', '2016-12-02 17:02:59', '2016-12-02 17:02:59', '0:0:0:0:0:0:0:1', '0:0:0:0:0:0:0:1', '1');
-INSERT INTO `t_admin` VALUES ('2', 'test', '05d5fcd9fd993a4fa50e930cbfb2b2bd', '123', 'test', '2016-12-01', null, null, null, null, '0');
+INSERT INTO `t_admin` VALUES ('1', 'admin', '05d5fcd9fd993a4fa50e930cbfb2b2bd', '123', 'admin', '2016-11-29', '2016-12-09 11:34:18', '2016-12-09 11:34:18', '0:0:0:0:0:0:0:1', '0:0:0:0:0:0:0:1', '1');
+INSERT INTO `t_admin` VALUES ('2', 'test1', '05d5fcd9fd993a4fa50e930cbfb2b2bd', '13800138004', 'test', '2016-12-01', null, null, null, null, '0');
 INSERT INTO `t_admin` VALUES ('3', 'aaa', null, 'ccc', 'bbb', null, null, null, null, null, '1');
 INSERT INTO `t_admin` VALUES ('4', 'aaa', null, 'ccc', 'bbb', null, null, null, null, null, '0');
 INSERT INTO `t_admin` VALUES ('5', 'aaa', null, 'ccc', 'bbb', null, null, null, null, null, '1');
@@ -77,6 +78,8 @@ INSERT INTO `t_admin` VALUES ('37', 'aaa', null, 'ccc', 'bbb', null, null, null,
 INSERT INTO `t_admin` VALUES ('38', 'aaa', null, 'ccc', 'bbb', null, null, null, null, null, '1');
 INSERT INTO `t_admin` VALUES ('39', 'aaa', null, 'ccc', 'bbb', null, null, null, null, null, '1');
 INSERT INTO `t_admin` VALUES ('40', 'aaa', null, 'ccc', 'bbb', null, null, null, null, null, '1');
+INSERT INTO `t_admin` VALUES ('41', '1233', null, '13800138001', '你', null, null, null, null, null, '1');
+INSERT INTO `t_admin` VALUES ('42', '22', null, '13800138002', 'ss', '2016-12-09', null, null, null, null, '1');
 
 -- ----------------------------
 -- Table structure for `t_house`
@@ -84,6 +87,7 @@ INSERT INTO `t_admin` VALUES ('40', 'aaa', null, 'ccc', 'bbb', null, null, null,
 DROP TABLE IF EXISTS `t_house`;
 CREATE TABLE `t_house` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) DEFAULT NULL COMMENT '房名称',
   `addr` varchar(500) DEFAULT NULL COMMENT '地址',
   `area` varchar(30) DEFAULT NULL COMMENT '区',
   `city` varchar(30) DEFAULT NULL COMMENT '市',
@@ -92,7 +96,11 @@ CREATE TABLE `t_house` (
   `startTime` date DEFAULT NULL COMMENT '合同开始时间',
   `endTime` date DEFAULT NULL COMMENT '合同结束时间',
   `waterPrice` double(11,0) DEFAULT NULL COMMENT '水价',
-  `electricityPrice` double(11,0) DEFAULT NULL COMMENT '电价',
+  `elecPrice` double(11,0) DEFAULT NULL COMMENT '电价',
+  `imgs` varchar(500) DEFAULT NULL COMMENT '房源图片以;隔开',
+  `own` varchar(60) DEFAULT NULL COMMENT '房东',
+  `tel` varchar(20) DEFAULT NULL COMMENT '房东电话',
+  `remark` varchar(500) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -121,12 +129,12 @@ CREATE TABLE `t_menu` (
 INSERT INTO `t_menu` VALUES ('1', '0', '系统管理', '&#xe641;', '0', null, '1');
 INSERT INTO `t_menu` VALUES ('2', '0', '房源管理', '&#xe62d;', '0', null, '1');
 INSERT INTO `t_menu` VALUES ('3', '0', '租金管理', '&#xe63c;', '0', null, '1');
-INSERT INTO `t_menu` VALUES ('4', '0', '客户管理', '&#xe613;', '0', null, '1');
+INSERT INTO `t_menu` VALUES ('4', '0', '客户管理', '&#xe612;', '0', null, '1');
 INSERT INTO `t_menu` VALUES ('5', '0', '报表管理', '&#xe629;', '0', null, '1');
 INSERT INTO `t_menu` VALUES ('6', '0', '微信管理', '&#xe63a;', '0', null, '1');
 INSERT INTO `t_menu` VALUES ('9', '1', '管理员', '&#xe612;', '0', 'admin/list', '1');
-INSERT INTO `t_menu` VALUES ('10', '1', '系统设置', '&#xe620;', '0', null, '1');
-INSERT INTO `t_menu` VALUES ('11', '2', '房源列表', '&#xe649;', '0', null, '1');
+INSERT INTO `t_menu` VALUES ('10', '1', '系统设置', '&#xe620;', '0', 'admin/profile', '1');
+INSERT INTO `t_menu` VALUES ('11', '2', '房源列表', '&#xe649;', '0', 'house/list', '1');
 INSERT INTO `t_menu` VALUES ('12', '2', '故障维修', '&#xe620;', '0', null, '1');
 
 -- ----------------------------
@@ -145,7 +153,7 @@ CREATE TABLE `t_order` (
   `totalPrice` decimal(11,2) DEFAULT NULL,
   `rentPrice` decimal(11,2) DEFAULT NULL,
   `waterPrice` decimal(11,2) DEFAULT NULL,
-  `electricityPrice` decimal(11,2) DEFAULT NULL,
+  `elecPrice` decimal(11,2) DEFAULT NULL,
   `netPrice` decimal(11,2) DEFAULT NULL,
   `cleanPrice` decimal(11,2) DEFAULT NULL,
   `orderPrice` decimal(11,2) DEFAULT NULL,
@@ -158,19 +166,23 @@ CREATE TABLE `t_order` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `t_profire`
+-- Table structure for `t_profile`
 -- ----------------------------
-DROP TABLE IF EXISTS `t_profire`;
-CREATE TABLE `t_profire` (
+DROP TABLE IF EXISTS `t_profile`;
+CREATE TABLE `t_profile` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `key` varchar(60) NOT NULL,
   `value` varchar(500) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_key` (`key`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of t_profire
+-- Records of t_profile
 -- ----------------------------
+INSERT INTO `t_profile` VALUES ('1', 'key_1', '22123', '123');
+INSERT INTO `t_profile` VALUES ('2', 'key_2', '223', '131');
 
 -- ----------------------------
 -- Table structure for `t_room`
@@ -190,7 +202,7 @@ CREATE TABLE `t_room` (
   `deposit` decimal(11,2) DEFAULT NULL COMMENT '压金',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
   `water` int(11) DEFAULT NULL COMMENT '水表读数',
-  `electricity` int(11) DEFAULT NULL COMMENT '电表读数',
+  `elec` int(11) DEFAULT NULL COMMENT '电表读数',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -235,8 +247,12 @@ CREATE TABLE `t_user` (
   `pwd` varchar(255) DEFAULT NULL,
   `regTime` date DEFAULT NULL COMMENT '注册时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_user
 -- ----------------------------
+INSERT INTO `t_user` VALUES ('1', 'aa', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `t_user` VALUES ('2', 'bbb', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `t_user` VALUES ('3', 'ccc', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `t_user` VALUES ('4', 'ddd', null, null, null, null, null, null, null, null, null, null);

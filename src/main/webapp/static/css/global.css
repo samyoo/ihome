@@ -328,7 +328,12 @@ body .site-demo-nav .layui-nav-item{line-height: 40px}
 .layui-layout-admin-min .layui-side .layui-side-scroll ul li.layui-nav-item > a span,
 .layui-layout-admin-min .layui-side .layui-side-scroll ul li.layui-nav-item > dl {display: none; padding: 0 3px;}
 
+.layui-form-item > .layui-form-label {margin-left: 15px;}
 
+.layui-form-pane .layui-input-block {
+    margin-left: 127px;
+    left: -1px;
+}
 /* 适配多设备 */
 @media screen and (max-width: 750px) {
     .layui-main{width: auto; margin: 0 10px;}
