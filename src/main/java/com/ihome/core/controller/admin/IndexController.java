@@ -42,7 +42,7 @@ public class IndexController extends Controller {
                 .collect(Collectors.groupingBy(m->m.getInt("pId")+""));
 
         mm.stream().filter(r -> {
-            List l = (List)child.get(r.getInt("id")+"");
+            List l = child.get(r.getInt("id")+"");
             return l !=null && l.size()>0;
         }).forEach(r -> r.set("children",child.get(r.getInt("id")+"")));
 

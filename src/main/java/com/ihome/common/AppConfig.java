@@ -57,6 +57,7 @@ public class AppConfig extends JFinalConfig {
         me.add("/admin", IndexController.class);
         me.add("/admin/admin", AdminController.class);
         me.add("/admin/house", HouseController.class);
+        me.add("/admin/room", HouseController.class);
 
     }
 
