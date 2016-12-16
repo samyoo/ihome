@@ -12,4 +12,9 @@ public class FileUtil {
     public static String getNewFileName(String name){
         return DateUtil.getDirDate()+"/"+System.currentTimeMillis() + FileUtil.getFileExt(name);
     }
+
+    public static String formatPath(String path){
+        path = path.substring(1,path.indexOf("WEB-INF"));
+        return path;
+    }
 }

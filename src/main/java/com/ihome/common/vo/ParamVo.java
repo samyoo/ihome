@@ -14,6 +14,8 @@ public class ParamVo implements Serializable {
     private String val;
     private String startTime;
     private String endTime;
+    private Integer hId;
+    private Integer uId;
 
     public ParamVo(int page, int size){
         this.page = page;
@@ -74,5 +76,21 @@ public class ParamVo implements Serializable {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public Integer getuId() {
+        return uId;
+    }
+
+    public void setuId(Integer uId) {
+        this.uId = uId;
+    }
+
+    public Integer gethId() {
+        return hId;
+    }
+
+    public void sethId(Integer hId) {
+        this.hId = hId;
     }
 }
