@@ -26,11 +26,9 @@ public class UploadController extends Controller {
         String path = Joiner.on(File.separator)
                 .join(getRequest().getContextPath(),Const.DEFAULT_BASE_UPLOAD_PATH,mvFile);
        //System.out.println("path:"+path);
-       /* try {
-            //FileUtils.moveFile(new File(upPath),new File(files.getUploadPath() + File.separator +mvFile));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        //FileUtils.moveFile(new File(upPath),new File(files.getUploadPath() + File.separator +mvFile));
+        new File(upPath).renameTo(new File(files.getUploadPath() + File.separator +mvFile));
+
         renderJson(JsonUtil.getData(ImmutableBiMap.of("src",path)));
     }
 

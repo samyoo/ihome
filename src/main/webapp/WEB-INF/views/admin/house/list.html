@@ -23,7 +23,7 @@
             //添加
             form.on("submit(add)",function () {
                 var html = common.laytpl("_open");
-                var index = common.openSave(html,'添加管理员',function () {
+                var index = common.openSave(html,'添加房源',function () {
                     var form = layui.form();
                     form.render();
                     openInit();
@@ -48,7 +48,7 @@
          function edit(e) {
              var data = JSON.parse($(e).attr("data-data"));
              var html = common.laytpl("_open",data);
-             var index = common.openSave(html,'修改管理员',function () {
+             var index = common.openSave(html,'修改房源',function () {
                  var form = layui.form();
                  form.render();
                  openInit();
@@ -79,12 +79,12 @@
              var laydate = layui.laydate;
 
              var start = {
-                 min: laydate.now(),
+                 //min: laydate.now(),
                  max: '2099-06-16 23:59:59',
                  istoday: false,
                  choose: function(datas){
                      end.min = datas; //开始日选好后，重置结束日的最小日期
-                     end.start = datas //将结束日的初始值设定为开始日
+                     end.start = datas; //将结束日的初始值设定为开始日
                  }
              };
 

@@ -20,6 +20,53 @@
                 return false;
             });
 
+            //模板
+            form.on('submit(model)', function (data) {
+                var el = document.createElement("a");
+                document.body.appendChild(el);
+                el.href = "${contextPath}/admin/room/model"; //url 是你得到的连接
+                el.target = '_new'; //指定在新窗口打开
+                el.click();
+                document.body.removeChild(el);
+                return false;
+            });
+
+            //导入
+            form.on('submit(import)', function (data) {
+
+                var html = common.laytpl("_import",data);
+
+                var index = layer.open({
+                    type: 1,
+                    area: ['360px', '240px'],
+                    content: html,
+                    title: '导入房间',
+                    btn:['确定','取消'],
+                    success:function (layero, index) {
+                        $(".layui-layer-content",$(layero)).css("overflow","inherit");
+
+                        layui.upload({
+                            url: '../../upload/index',
+                            success: function(res){
+                                var imgs = $("#imgs").val();
+                                $("#himgs").val(imgs+res.data.src+";");
+                                $("#addImgs").append("<div class='layui-input-inline' style='width: 50px;'><img width='50' height='50' src='"+res.data.src+"'></div>");
+                            }
+                        });
+                        form.render();
+                    }
+                });
+                /*layer.style(index, {
+
+                    overflow: 'inherit',
+                    //width: '1000px',
+                    //top: '10px'
+                });*/
+
+                return false;
+            });
+
+
             //添加
             form.on("submit(add)",function () {
                 var html = common.laytpl("_open");
@@ -105,6 +152,12 @@
                 <button class="layui-btn" lay-submit lay-filter="add">
                     <i class="layui-icon">&#xe61f;</i> 添加
                 </button>
+                <button class="layui-btn" lay-submit lay-filter="import">
+                    <i class="layui-icon">&#xe62f;</i> 导入
+                </button>
+                <button class="layui-btn" lay-submit lay-filter="model">
+                    <i class="layui-icon">&#xe601;</i> 模板
+                </button>
             </div>
         </div>
     </div>
@@ -167,7 +220,7 @@
 <script id="_open" type="text/html">
     <fieldset class="layui-elem-field" style="margin: 5px">
         <legend>管理员</legend>
-        <form class="layui-form layui-form-pane" id="aab">
+        <form class="layui-form layui-form-pane" >
             <div class="layui-form-item">
                 <div class="layui-inline">
                     <label class="layui-form-label">帐号:</label>
@@ -197,6 +250,35 @@
             </div>
             <div style="display:none;">
                 <input type="hidden" name="admin.id" value="{{ d.id||''}}">
+                <button class="layui-btn  layui-btn-normal icon-save" lay-submit lay-filter="save">确定</button>
+            </div>
+        </form>
+    </fieldset>
+</script>
+
+<script id="_import" type="text/html">
+    <fieldset class="layui-elem-field" style="margin: 5px">
+        <legend>导入</legend>
+        <form class="layui-form layui-form-pane" >
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">选择房源:</label>
+                    <div class="layui-input-inline">
+                        <select name="hId" >
+                                <option value="0">请选择</option>
+                            <#list hList as item>
+                                <option value="${item.id}">${item.name}</option>
+                            </#list>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item" id="importExle">
+                <div class="layui-input-inline" style="margin-left: 15px">
+                    <input type="file" name="file" class="layui-upload-file" lay-title="导入房间">
+                </div>
+            </div>
+            <div style="display:none;">
                 <button class="layui-btn  layui-btn-normal icon-save" lay-submit lay-filter="save">确定</button>
             </div>
         </form>

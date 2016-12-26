@@ -43,6 +43,8 @@ public class RoomController extends Controller {
      */
     public void list(){
         if(Constants.HTTP_GET.equals(getRequest().getMethod())){
+            List<House> list = House.DAO.findALl();
+            setAttr("hList",list);
             render(Constants.PAGE_LIST);
         }else{
             int page = getParaToInt("page", Constants.DEFAULT_PAGE);
@@ -54,7 +56,7 @@ public class RoomController extends Controller {
             vo.setTel(tel);
             vo.setName(name);
 
-            Page<House> list = House.DAO.getPage(vo);
+            Page<Room> list = Room.DAO.getPage(vo);
 
             renderJson(JsonUtil.getData(list));
         }
@@ -65,8 +67,8 @@ public class RoomController extends Controller {
      * 保存
      */
     public void save(){
-        House house = getModel(House.class);
-        if(house.save()){
+        Room room = getModel(Room.class);
+        if(room.save()){
             renderJson(JsonUtil.getAddSucc());
         }else {
             renderJson(JsonUtil.getAddFail());
@@ -78,20 +80,21 @@ public class RoomController extends Controller {
      * 管理员修改
      */
     public void update(){
-        House house = getModel(House.class);
-        if(house.update()){
+        Room room = getModel(Room.class);
+        if(room.update()){
             renderJson(JsonUtil.getEditSucc());
         }else {
             renderJson(JsonUtil.getEditFail());
         }
     }
 
-    public void getTemp(){
+    public void model(){
         String path = LogInterceptor.class.getClassLoader().getResource("").getPath();
         // 截取需要的路径
         path = FileUtil.formatPath(path);//E:/JavaTool/apache-tomcat-8.0.15/webapps/esr-sdap/
         String fileName="WEB-INF/classes/房间模板.xlsx";
         path=path+fileName;
+        System.out.println(path);
         renderFile(new File(path));
     }
 

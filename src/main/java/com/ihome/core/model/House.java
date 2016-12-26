@@ -47,7 +47,7 @@ public class House extends Model<House> {
     }
 
     public List<House> findALl(){
-        return this.find("select * from t_house");
+        return this.find("select * from t_house order by id desc ");
     }
 
     public Page<House> getPage(ParamVo vo){

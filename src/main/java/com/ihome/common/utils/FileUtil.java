@@ -14,7 +14,7 @@ public class FileUtil {
     }
 
     public static String formatPath(String path){
-        path = path.substring(1,path.indexOf("WEB-INF"));
+        path = path.substring(0,path.indexOf("WEB-INF"));
         return path;
     }
 }
