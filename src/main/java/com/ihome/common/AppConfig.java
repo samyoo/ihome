@@ -2,10 +2,7 @@ package com.ihome.common;
 
 import com.ihome.common.plugin.SchedulerPlugin;
 import com.ihome.core.controller.UploadController;
-import com.ihome.core.controller.admin.AdminController;
-import com.ihome.core.controller.admin.HouseController;
-import com.ihome.core.controller.admin.IndexController;
-import com.ihome.core.controller.admin.RoomController;
+import com.ihome.core.controller.admin.*;
 import com.ihome.core.controller.weixin.WeixinController;
 import com.jfinal.config.*;
 import com.jfinal.ext.handler.ContextPathHandler;
@@ -60,6 +57,7 @@ public class AppConfig extends JFinalConfig {
         me.add("/admin/admin", AdminController.class);
         me.add("/admin/house", HouseController.class);
         me.add("/admin/room", RoomController.class);
+        me.add("/admin/fault", FaultController.class);
 
         me.add("/wx/index", WeixinController.class);
     }

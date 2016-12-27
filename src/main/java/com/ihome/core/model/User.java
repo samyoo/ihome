@@ -21,7 +21,7 @@ public class User extends Model<User> {
         String name = "name";
     }
 
-    public List<User> findALl(){
+    public List<User> findAll(){
         return this.find("select * from t_user");
     }
 
