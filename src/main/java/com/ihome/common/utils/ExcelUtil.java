@@ -60,8 +60,8 @@ public class ExcelUtil {
         for (int numSheet = 0; numSheet < xssfWorkbook.getNumberOfSheets(); numSheet++) {
             List<String[]> listSheet = new ArrayList<String[]>();
             XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(numSheet);
-            System.out.println("numSheet = " + numSheet);
-            System.out.println("sheetValue = " + xssfSheet.getLastRowNum());
+            //System.out.println("numSheet = " + numSheet);
+            //System.out.println("sheetValue = " + xssfSheet.getLastRowNum());
             if (xssfSheet == null) {
                 continue;
             }
@@ -82,6 +82,7 @@ public class ExcelUtil {
                                 datas.setCellType(Cell.CELL_TYPE_NUMERIC);
                             }
                             data = getCellValue(datas, DateType);
+                            //System.out.println("cellNum:"+cellNum+"  data:"+data);
                             rowData[cellNum] = data;
                         } else {
                             rowData[cellNum] = "";
@@ -146,6 +147,7 @@ public class ExcelUtil {
                             datas.setCellType(Cell.CELL_TYPE_NUMERIC);
                         }
                         String data = getCellValue(datas, webType);
+                        System.out.println("cellNum:"+cellNum+"  data:"+data);
                         rowData[cellNum] = data;
                     }
                     listSheet.add(rowData);

@@ -6,6 +6,7 @@ import com.ihome.common.interceptor.AdminInterceptor;
 import com.ihome.common.utils.ExcelUtil;
 import com.ihome.common.utils.FileUtil;
 import com.ihome.common.utils.JsonUtil;
+import com.ihome.common.utils.StrUtil;
 import com.ihome.common.vo.ParamVo;
 import com.ihome.core.model.House;
 import com.ihome.core.model.Room;
@@ -94,7 +95,7 @@ public class RoomController extends Controller {
         path = FileUtil.formatPath(path);//E:/JavaTool/apache-tomcat-8.0.15/webapps/esr-sdap/
         String fileName="WEB-INF/classes/房间模板.xlsx";
         path=path+fileName;
-        System.out.println(path);
+        //System.out.println(path);
         renderFile(new File(path));
     }
 
@@ -102,25 +103,29 @@ public class RoomController extends Controller {
      * 上传房间数据
      */
     public void upload(){
-        UploadFile files = getFile("file");
+        //UploadFile files = getFile("file");
         try {
-            String upPath = files.getUploadPath() + File.separator + files.getFileName();
-            List<List<String[]>> list= ExcelUtil.readXlsx(upPath, "yyyyMMdd");
-            List<Room> rList = Lists.newArrayList();
+            String filePath = getPara("filePath");
 
-            list.get(0).stream().forEach(str->{
+            String hId = getPara("hId");
+            List<List<String[]>> list= ExcelUtil.readXlsx(filePath, "yyyyMMdd");
+            List<Room> rList = Lists.newArrayList();
+            System.out.println(list);
+            list.get(0).stream().filter(s-> StrUtil.isNotBlank(s[0])).forEach(str->{
                 Room room = new Room();
+                System.out.println("floor:"+str[0]);
                 room.set(Room.ATTR.floor,str[0]);
                 room.set(Room.ATTR.doorplate,str[1]);
                 room.set(Room.ATTR.roomType,str[2]);
                 room.set(Room.ATTR.rentPrice,str[3]);
                 room.set(Room.ATTR.elec,str[4]);
                 room.set(Room.ATTR.water,str[5]);
+                room.set(Room.ATTR.hId,hId);
                 rList.add(room);
             });
 
             Db.batchSave(rList,20);
-
+            renderJson(JsonUtil.getAddSucc());
         } catch (IOException e) {
             e.printStackTrace();
         }

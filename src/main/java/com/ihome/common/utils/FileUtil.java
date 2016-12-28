@@ -1,5 +1,8 @@
 package com.ihome.common.utils;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Created by Administrator on 2016/12/10 0010.
  */
@@ -17,4 +20,5 @@ public class FileUtil {
         path = path.substring(0,path.indexOf("WEB-INF"));
         return path;
     }
+
 }

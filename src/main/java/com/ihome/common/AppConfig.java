@@ -58,6 +58,8 @@ public class AppConfig extends JFinalConfig {
         me.add("/admin/house", HouseController.class);
         me.add("/admin/room", RoomController.class);
         me.add("/admin/fault", FaultController.class);
+        me.add("/admin/user", UserController.class);
+        me.add("/admin/swot", UserController.class);
 
         me.add("/wx/index", WeixinController.class);
     }
@@ -79,8 +81,6 @@ public class AppConfig extends JFinalConfig {
                 ParamNameStyles.lowerUnderlineModule("t"));
         arp.setShowSql(true);
         me.add(arp);
-
-
 
         // sql记录
         SqlReporter.setLog(true);

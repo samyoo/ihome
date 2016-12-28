@@ -50,7 +50,8 @@ public class Room extends Model<Room> {
 
     public Page<Room> getPage(ParamVo vo){
         StringBuilder sql = new StringBuilder();
-        sql.append(" from t_room where 1=1 ");
+        //select r.*,h.name,u.name,u.tel from t_room r left join t_house h USING(hId) left join t_user u USING(uId)
+        sql.append("from t_room r left join t_house h on r.hId=h.id left join t_user u on r.uId=u.id where 1=1 ");
         if(vo.gethId()!=null&&vo.gethId()>0){
             sql.append(" and `hId` = ").append(vo.getVal());
         }
@@ -58,6 +59,6 @@ public class Room extends Model<Room> {
             sql.append(" and `uId` = ").append(vo.getuId());
         }
 
-        return this.paginate(vo.getPage(),vo.getSize(),"select * ",sql.toString());
+        return this.paginate(vo.getPage(),vo.getSize(),"select r.*,h.name,u.name as userName,u.tel ",sql.toString());
     }
 }

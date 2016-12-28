@@ -101,6 +101,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.directory.studio</groupId>
+            <artifactId>org.apache.commons.io</artifactId>
+            <version>2.4</version>
+        </dependency>
+
+        <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
@@ -150,7 +156,7 @@
 
     </dependencies>
 
-    <repositories>
+<!--    <repositories>
         <repository>
             <snapshots>
                 <enabled>true</enabled>
@@ -166,7 +172,7 @@
             <name>Public Repositories</name>
             <url>http://192.168.60.8:8081/nexus/content/groups/public/</url>
         </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories>-->
 
 
     <build>

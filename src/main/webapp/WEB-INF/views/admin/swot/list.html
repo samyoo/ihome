@@ -49,7 +49,7 @@
                         layero.find('.icon-save').click();
                     },
                     success:function (layero, index) {
-                        $(".layui-layer-content",$(layero)).css("overflow","visible");
+                        $(".layui-layer-content",$(layero)).css("overflow","inherit");
 
                         layui.upload({
                             url: '../../upload/index',
@@ -180,15 +180,6 @@
                 <button class="layui-btn" lay-submit lay-filter="search" id="search">
                     <i class="layui-icon">&#xe615;</i> 搜索
                 </button>
-                <button class="layui-btn" lay-submit lay-filter="add">
-                    <i class="layui-icon">&#xe61f;</i> 添加
-                </button>
-                <button class="layui-btn" lay-submit lay-filter="import">
-                    <i class="layui-icon">&#xe62f;</i> 导入
-                </button>
-                <button class="layui-btn" lay-submit lay-filter="model">
-                    <i class="layui-icon">&#xe601;</i> 模板
-                </button>
             </div>
         </div>
     </div>
@@ -198,14 +189,11 @@
             <tr>
                 <th>序号</th>
                 <th>房源名称</th>
-                <th>房间门号</th>
-                <th>房间类型</th>
-                <th>租金</th>
-                <th>住户名称</th>
-                <th>住户手机</th>
-                <th>压金</th>
-                <th>到期时间</th>
-                <th>备注</th>
+                <th>房间门牌</th>
+                <th>记录年月</th>
+                <th>记录类型</th>
+                <th>记录读数</th>
+                <th>录入时间</th>
                 <th>操作</th>
             </tr>
             </thead>
@@ -225,13 +213,10 @@
         <td>{{ (d.data.pageNumber-1)*d.data.pageSize+1+index }}</td>
         <td>{{ item.name }}</td>
         <td>{{ item.doorplate }}</td>
-        <td>{{ item.roomType }}</td>
-        <td>{{ item.rentPrice }}</td>
-        <td>{{ item.userName||'' }}</td>
-        <td>{{ item.tel||'' }}</td>
-        <td>{{ item.deposit||'' }}</td>
-        <td>{{ item.endTime||'' }}</td>
-        <td>{{ item.remark||'' }}</td>
+        <td>{{ item.year+'-'+item.month }}</td>
+        <td>{{ item.typeName }}</td>
+        <td>{{ item.val }}</td>
+        <td>{{ item.updateTime }}</td>
         <td>
             <a href="javascript:;" class="layui-btn layui-btn-mini"
                data-data='{{ JSON.stringify(item) }}' onclick="edit(this)">编辑</a>
@@ -291,34 +276,5 @@
     </fieldset>
 </script>
 
-<script id="_import" type="text/html">
-    <fieldset class="layui-elem-field" style="margin: 5px">
-        <legend>导入</legend>
-        <form class="layui-form layui-form-pane" >
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label class="layui-form-label">选择房源:</label>
-                    <div class="layui-input-inline">
-                        <select name="hId" >
-                                <option value="0">请选择</option>
-                            <#list hList as item>
-                                <option value="${item.id}">${item.name}</option>
-                            </#list>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="layui-form-item" id="importExle">
-                <div class="layui-input-inline" style="margin-left: 15px">
-                    <input type="file" name="file" lay-type="file" class="layui-upload-file" lay-title="导入房间">
-                </div>
-                <input type="hidden" id="filePath" name="filePath">
-            </div>
-            <div style="display:none;">
-                <button class="layui-btn  layui-btn-normal icon-save" lay-submit lay-filter="impExl">确定</button>
-            </div>
-        </form>
-    </fieldset>
-</script>
 
 </@mainlayout>

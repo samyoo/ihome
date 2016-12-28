@@ -7,6 +7,7 @@ import com.ihome.common.utils.JsonUtil;
 import com.jfinal.core.Const;
 import com.jfinal.core.Controller;
 import com.jfinal.upload.UploadFile;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import java.io.IOException;
  */
 public class UploadController extends Controller {
 
-    public void index(){
+    public void index() {
         UploadFile files = getFile("file");
         File f = files.getFile();
         String upPath = files.getUploadPath() + File.separator + files.getFileName();
@@ -24,12 +25,18 @@ public class UploadController extends Controller {
         String mvFile = FileUtil.getNewFileName(f.getName());
         //System.out.println("mvFile:"+mvFile);
         String path = Joiner.on(File.separator)
-                .join(getRequest().getContextPath(),Const.DEFAULT_BASE_UPLOAD_PATH,mvFile);
-       //System.out.println("path:"+path);
-        //FileUtils.moveFile(new File(upPath),new File(files.getUploadPath() + File.separator +mvFile));
-        new File(upPath).renameTo(new File(files.getUploadPath() + File.separator +mvFile));
+                .join(getRequest().getContextPath(), Const.DEFAULT_BASE_UPLOAD_PATH, mvFile);
 
-        renderJson(JsonUtil.getData(ImmutableBiMap.of("src",path)));
+        String realPath = files.getUploadPath() + File.separator + mvFile;
+        try {
+            FileUtils.moveFile(new File(upPath),new File(realPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        renderJson(JsonUtil.getData(ImmutableBiMap.of("src", path, "path", realPath)));
     }
+
+
 
 }
