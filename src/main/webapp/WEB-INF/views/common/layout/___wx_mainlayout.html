@@ -1,0 +1,36 @@
+<#macro mainlayout pageTitle="iHome" pageCss="" pageJavascript=""  >
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>iHome</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="format-detection" content="telephone=no">
+
+        <!-- Css BEGIN -->
+        <#include "/WEB-INF/views/common/inc/_wx_css.html" />
+        <!-- Css END -->
+
+        <!-- JavaScript BEGIN -->
+        <#include "/WEB-INF/views/common/inc/_wx_js.html" />
+        <!-- JavaScript END -->
+    </head>
+    <body>
+    <div class="admin-main">
+
+
+        <#nested />
+
+    </div>
+
+    <!-- JavaScript BEGIN -->
+    <#include "/WEB-INF/views/common/inc/_wx_footer.html" />
+    <!-- JavaScript END -->
+    </body>
+    </html>
+</#macro>

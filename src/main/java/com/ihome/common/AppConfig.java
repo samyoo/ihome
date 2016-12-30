@@ -61,7 +61,8 @@ public class AppConfig extends JFinalConfig {
         me.add("/admin/user", UserController.class);
         me.add("/admin/swot", UserController.class);
 
-        me.add("/wx/index", WeixinController.class);
+        me.add("/wx", WeixinController.class);
+        me.add("/wx/home",com.ihome.core.controller.weixin.IndexController.class,"/weixin");
     }
 
     /**
