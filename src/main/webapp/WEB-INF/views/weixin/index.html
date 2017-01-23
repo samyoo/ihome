@@ -1,113 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-    <title>WeUI</title>
+<#include "/WEB-INF/views/common/layout/___wx_mainlayout.html" />
 
-</head>
-<body>
+<#assign pageCss>
+    <style type="text/css">
+
+    </style>
+</#assign>
+<!-- 加载某个页面所需要的JavaScript脚本文件 -->
+<#assign pageJavascript>
+    <script type="text/javascript">
 
 
+    </script>
+</#assign>
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss >
 
-<div class="weui-tab">
-    <div class="weui-tab__panel">
-
-        <a href="javascript:;" class="weui-btn weui-btn_default" id="dia">页面次要操作 Normal</a>
-
-        <div style="display: none;" id="alert">
-            <div class="weui-mask"></div>
-            <div class="weui-dialog">
-                <div class="weui-dialog__hd"><strong class="weui-dialog__title">弹窗标题</strong></div>
-                <div class="weui-dialog__bd">弹窗内容，告知当前页面信息等</div>
-                <div class="weui-dialog__ft">
-                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">确定</a>
-                </div>
-            </div>
-        </div>
-
+<div class="houses pad15">
+    <h3>我们房源</h3>
+    <!-- 项目列表循环 -->
+    <div class="comStyle house-items ">
+        <h3>南山区</h3>
+        <ul class="ulItem">
+            <li>
+                <a href="/Apartment/estate/id/13.html">
+                    <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/admin/2016-02-02/56b0639eb48c0.jpg@!4x5"
+                         alt="">
+                    <p class="title-bg"></p>
+                    <p class="title">蛇口海明苑</p>
+                    <p class="status">12套可租</p>
+                </a>
+            </li>
+            <li>
+                <a href="/Apartment/estate/id/10.html">
+                    <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/estate/2015-08-03/55bede72f2500.jpg@!4x5"
+                         alt="">
+                    <p class="title-bg"></p>
+                    <p class="title">大冲城市花园</p>
+                    <p class="status">0间可租</p>
+                </a>
+            </li>
+            <li>
+                <a href="/Apartment/estate/id/2.html">
+                    <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/estate/2015-08-03/55bedf3cce5d8.jpg@!4x5"
+                         alt="">
+                    <p class="title-bg"></p>
+                    <p class="title">水木丹华</p>
+                    <p class="status">8间可租</p>
+                </a>
+            </li>
+            <li>
+                <a href="/Apartment/estate/id/1.html">
+                    <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/estate/2015-08-03/55beddf9a7829.jpg@!4x5"
+                         alt="">
+                    <p class="title-bg"></p>
+                    <p class="title">汇景豪苑</p>
+                    <p class="status">1间可租</p>
+                </a>
+            </li>
+        </ul>
+        <div class="clearb"></div>
     </div>
-    <div class="weui-tabbar">
-        <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
-            <img src="../static/img/icon_tabbar.png" alt="" class="weui-tabbar__icon">
-            <p class="weui-tabbar__label">微信</p>
-        </a>
-        <a href="javascript:;" class="weui-tabbar__item">
-            <img src="../static/img/icon_tabbar.png" alt="" class="weui-tabbar__icon">
-            <p class="weui-tabbar__label">通讯录</p>
-        </a>
-        <a href="javascript:;" class="weui-tabbar__item">
-            <img src="../static/img/icon_tabbar.png" alt="" class="weui-tabbar__icon">
-            <p class="weui-tabbar__label">发现</p>
-        </a>
-        <a href="javascript:;" class="weui-tabbar__item">
-            <img src="../static/img/icon_tabbar.png" alt="" class="weui-tabbar__icon">
-            <p class="weui-tabbar__label">我</p>
-        </a>
+    <div class="comStyle house-items ">
+        <h3>宝安区</h3>
+        <ul class="ulItem">
+            <li>
+                <a href="/Apartment/estate/id/38.html">
+                    <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/admin/2017-01-10/5874bc75677e9.jpg@!4x5"
+                         alt="">
+                    <p class="title-bg"></p>
+                    <p class="title">西乡海乐家2号楼</p>
+                    <p class="status">59套可租</p>
+                </a>
+            </li>
+            <li>
+                <a href="/Apartment/estate/id/37.html">
+                    <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/admin/2016-12-22/585b98298f992.jpg@!4x5"
+                         alt="">
+                    <p class="title-bg"></p>
+                    <p class="title">西乡大益家</p>
+                    <p class="status">173间可租</p>
+                </a>
+            </li>
+            <li>
+                <a href="/Apartment/estate/id/23.html">
+                    <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/admin/2016-08-10/57aa9eb8932fd.jpg@!4x5"
+                         alt="">
+                    <p class="title-bg"></p>
+                    <p class="title">西乡海湾家</p>
+                    <p class="status">1间可租</p>
+                </a>
+            </li>
+            <li>
+                <a href="/Apartment/estate/id/22.html">
+                    <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/estate/hlj/51/01.jpg@!4x5" alt="">
+                    <p class="title-bg"></p>
+                    <p class="title">西乡海乐家</p>
+                    <p class="status">1间可租</p>
+                </a>
+            </li>
+            <li>
+                <a href="/Apartment/estate/id/14.html">
+                    <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/admin/2016-03-31/56fcf6183756c.jpg@!4x5"
+                         alt="">
+                    <p class="title-bg"></p>
+                    <p class="title">西乡银田家</p>
+                    <p class="status">15间可租</p>
+                </a>
+            </li>
+            <li>
+                <a href="/Apartment/estate/id/12.html">
+                    <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/admin/2016-03-31/56fcf8387b2fb.jpg@!4x5"
+                         alt="">
+                    <p class="title-bg"></p>
+                    <p class="title">西乡碧海栈</p>
+                    <p class="status">17间可租</p>
+                </a>
+            </li>
+            <li>
+                <a href="/Apartment/estate/id/11.html">
+                    <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/admin/2016-03-31/56fcf60d203d8.jpg@!4x5"
+                         alt="">
+                    <p class="title-bg"></p>
+                    <p class="title">固戍果岭家</p>
+                    <p class="status">18间可租</p>
+                </a>
+            </li>
+            <li>
+                <a href="/Apartment/estate/id/9.html">
+                    <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/admin/2016-03-31/56fcf5dff3ca9.jpg@!4x5"
+                         alt="">
+                    <p class="title-bg"></p>
+                    <p class="title">海雅缤纷家</p>
+                    <p class="status">1间可租</p>
+                </a>
+            </li>
+        </ul>
+        <div class="clearb"></div>
     </div>
+    <!-- 项目列表循环结束 -->
 </div>
 
-
-<script type="text/javascript">
-    $(function(){
-        $('.weui-tabbar__item').on('click', function () {
-            $(this).addClass('weui-bar__item_on').siblings('.weui-bar__item_on').removeClass('weui-bar__item_on');
-        });
-    });
-</script>
-
-
-
-<script type="text/javascript">
-    // toast
-    $(function(){
-        var $toast = $('#alert');
-        $('#dia').on('click', function(){
-            if ($toast.css('display') != 'none') return;
-
-            $toast.fadeIn(100);
-           /* setTimeout(function () {
-                $toast.fadeOut(100);
-            }, 2000);*/
-        });
-    });
-
-    // loading
-    $(function(){
-        var $loadingToast = $('#loadingToast');
-        $('#showLoadingToast').on('click', function(){
-            if ($loadingToast.css('display') != 'none') return;
-
-            $loadingToast.fadeIn(100);
-            setTimeout(function () {
-                $loadingToast.fadeOut(100);
-            }, 2000);
-        });
-    });
-
-    $(function () {
-        var $iosDialog1 = $('#iosDialog1'),
-                $iosDialog2 = $('#iosDialog2'),
-                $androidDialog1 = $('#androidDialog1'),
-                $androidDialog2 = $('#androidDialog2');
-
-        $('#dialogs').on('click', '.weui-dialog__btn', function(){
-            $(this).parents('.js_dialog').fadeOut(200);
-        });
-
-        $('#showIOSDialog1').on('click', function(){
-            $iosDialog1.fadeIn(200);
-        });
-        $('#showIOSDialog2').on('click', function(){
-            $iosDialog2.fadeIn(200);
-        });
-        $('#showAndroidDialog1').on('click', function(){
-            $androidDialog1.fadeIn(200);
-        });
-        $('#showAndroidDialog2').on('click', function(){
-            $androidDialog2.fadeIn(200);
-        });
-    });
-</script>
-</body>
-</html>
+</@mainlayout>

@@ -29,6 +29,11 @@ public class IndexController extends Controller {
         render(Constants.PAGE_INDEX);
 	}
 
+    public void detail() {
+        System.out.println("detail");
+
+        render(Constants.PAGE_DETAIL);
+    }
 
 }
 

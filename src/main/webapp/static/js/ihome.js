@@ -369,7 +369,76 @@ common.photos = function(id){
     });
 }
 
+/**
+ * 懒加载图片
+ * @param attr
+ */
+common.lazyload = function(attr) {
+    var attr = attr || 'lazy';
+    var imgs = document.querySelectorAll('.lazy');
+    var wh = window.innerHeight;
+    var loadCount = 0;
+    var t = null;
+    var loadImage = function() {
+        for (var i = 0, len = imgs.length; i < len; i++) {
+            if (inWindow(imgs[i])) {
+                if (imgs[i].dataset[attr] != 'loaded') {
+                    imgs[i].src = imgs[i].dataset[attr];
+                    imgs[i].dataset[attr] = 'loaded';
+                    loadCount++;
+                }
+                if (loadCount == imgs.length) {
+                    clearTimeout(t);
+                    window.removeEventListener('scroll', onscroll);
+                }
+            }
+        }
+    }
+    var inWindow = function(o) {
+        var t = o.getBoundingClientRect().top;
+        return (t > 0 && t <= wh);
+    }
+    var onscroll = function() {
+        clearTimeout(t);
+        t = setTimeout(function() {
+            loadImage();
+        }, 50);
+    }
+    loadImage();
+    window.addEventListener('scroll', onscroll);
+};
 
+/**
+ *  滚动图片
+ */
+var swipers = [];
+common.slider = function(){
+    /*var sliders = document.querySelectorAll('.wm-slider');
+    for(var i = 0, len = sliders.length; i < len; i++){
+        if(sliders[i].querySelectorAll('.swiper-slide').length >= 2){
+            var swiper = new Swiper(sliders[i], {
+                pagination: sliders[i].querySelector('.swiper-pagination'),
+                paginationClickable: true,
+                loop : true,
+                autoplay : 3000,
+                lazyLoading : true,
+                speed: 1000
+            });
+            swipers[window.location.pathname].push(swiper);
+        }
+    }*/
+    var mySwiper = new Swiper ('.swiper-container', {
+       // direction: 'vertical',
+        loop: true,
+        paginationClickable: true,
+        autoplay : 3000,
+        speed: 1000,
+        // 如果需要分页器
+        pagination: '.swiper-pagination',
+    });
+
+    //console.log(mySwiper)
+};
 
 $(function () {
 

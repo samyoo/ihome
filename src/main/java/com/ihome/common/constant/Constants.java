@@ -12,6 +12,7 @@ public class Constants {
 
     public static final String PAGE_LIST = "list.html";
     public static final String PAGE_INDEX = "index.html";
+    public static final String PAGE_DETAIL = "detail.html";
     public static final String PAGE_ADD = "add.html";
     public static final String PAGE_EDIT = "edit.html";
     public static final String PAGE_LOGIN = "login.html";

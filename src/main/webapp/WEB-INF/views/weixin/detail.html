@@ -1,0 +1,179 @@
+<#include "/WEB-INF/views/common/layout/___wx_mainlayout.html" />
+
+<#assign pageCss>
+
+    <style type="text/css">
+       img{
+           width: 100%;
+       }
+    </style>
+</#assign>
+<!-- 加载某个页面所需要的JavaScript脚本文件 -->
+<#assign pageJavascript>
+    <script type="text/javascript">
+        $(function () {
+            common.slider();
+        })
+
+    </script>
+</#assign>
+<@mainlayout pageJavascript=pageJavascript pageCss=pageCss >
+
+<div class="swiper-container">
+    <div class="swiper-wrapper" >
+        <!-- 轮播图循环开始 -->
+        <div class="swiper-slide"  >
+            <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/admin/2016-02-02/56b0639897f60.jpg@!640x320" alt="">
+        </div>
+        <div class="swiper-slide "  >
+            <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/admin/2016-02-02/56b0639899ec5.jpg@!640x320" alt="">
+        </div>
+        <div class="swiper-slide"  >
+            <img src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/admin/2016-02-02/56b0639893606.jpg@!640x320" alt="">
+        </div>            <!-- 循环结束 -->
+    </div>
+    <div class="swiper-pagination">
+    </div>
+</div>
+
+
+
+<div class="wm-position">
+    <div class="container">
+        <h3>蛇口海明苑</h3>
+        <p>
+            <!--<img src="/Application/Home/View/src/m/images/cion1.png" alt="蛇口海明苑" style="width: 20px; margin-right: 5px; vertical-align: -5px;">-->
+            华润万家、又一家超市、宝能太古城、海岸城
+        </p>
+        <p>
+            <!--<img src="/Application/Home/View/src/m/images/cion6.png" alt="蛇口海明苑" style="width: 20px;margin-right: 10px; vertical-align: -4px;">-->
+            蛇口线（2号线）东角头站
+        </p>
+        <p>
+            <!--<img src="/Application/Home/View/src/m/images/cion7.png" alt="蛇口海明苑" style="width: 18px;margin-right: 12px; vertical-align: -6px;">-->
+            深圳市南山区海明苑
+        </p>
+    </div>
+</div>
+<div>
+    <div class="container">
+        <p class="huxing">
+            <!--<img src="/Application/Home/View/src/m/images/cion8.png" style="width:5px" alt="placeholder+image">-->
+            所含户型
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- 套房循环列表开始 -->
+    <div class="wm-hx-item">
+        <div class="swiper-container min-slider">
+                <span class="price">
+				¥
+				7,200-14,488			</span>
+            <!-- <span class="mirror icon"></span> -->
+            <div class="swiper-wrapper">
+                <!-- 循环列表 -->
+                <div class="swiper-slide ">
+                    <a href="/Apartment/house_type/type_id/36.html">
+                        <img class="lazy" data-lazy="loaded" src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/house_type/13/2.jpg@!640x320" alt="">
+                    </a>
+                </div>
+                <!-- 循环列表结束 -->
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        <div class="info">
+            <h2>精致海景复式两房  &nbsp;&nbsp;<span style="font-size: 12px">剩余   5套   可租</span> </h2>
+            <p>82㎡正南朝向</p>
+        </div>
+    </div><div class="wm-hx-item">
+    <div class="swiper-container min-slider">
+                <span class="price">
+				¥
+				7,000-14,760			</span>
+        <!-- <span class="mirror icon"></span> -->
+        <div class="swiper-wrapper">
+            <!-- 循环列表 -->
+            <div class="swiper-slide ">
+                <a href="/Apartment/house_type/type_id/38.html">
+                    <img class="lazy" data-lazy="loaded" src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/house_type/13/4.jpg@!640x320" alt="">
+                </a>
+            </div>
+            <!-- 循环列表结束 -->
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="info">
+        <h2>超大海景复式两房  &nbsp;&nbsp;<span style="font-size: 12px">剩余   3套   可租</span> </h2>
+        <p>89-93㎡正南朝向，带衣帽间</p>
+    </div>
+</div><div class="wm-hx-item">
+    <div class="swiper-container min-slider">
+                <span class="price">
+				¥
+				7,100-14,288			</span>
+        <!-- <span class="mirror icon"></span> -->
+        <div class="swiper-wrapper">
+            <!-- 循环列表 -->
+            <div class="swiper-slide ">
+                <a href="/Apartment/house_type/type_id/37.html">
+                    <img class="lazy" data-lazy="loaded" src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/house_type/13/3.jpg@!640x320" alt="">
+                </a>
+            </div>
+            <!-- 循环列表结束 -->
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="info">
+        <h2>豪华海景复式两房  &nbsp;&nbsp;<span style="font-size: 12px">剩余   2套   可租</span> </h2>
+        <p>88㎡南北通透三阳台</p>
+    </div>
+</div><div class="wm-hx-item">
+    <div class="swiper-container min-slider">
+                <span class="price">
+				¥
+				5,800-8,699			</span>
+        <!-- <span class="mirror icon"></span> -->
+        <div class="swiper-wrapper">
+            <!-- 循环列表 -->
+            <div class="swiper-slide ">
+                <a href="/Apartment/house_type/type_id/35.html">
+                    <img class="lazy" data-lazy="loaded" src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/house_type/13/1.jpg@!640x320" alt="">
+                </a>
+            </div>
+            <!-- 循环列表结束 -->
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="info">
+        <h2>特价复式两房  &nbsp;&nbsp;<span style="font-size: 12px">剩余   1套   可租</span> </h2>
+        <p>74㎡正北朝向</p>
+    </div>
+</div>
+    <div class="wm-hx-item">
+    <div class="swiper-container min-slider">
+                <span class="price">
+				¥
+				2,000-8,000			</span>
+        <!-- <span class="mirror icon"></span> -->
+        <div class="swiper-wrapper">
+            <!-- 循环列表 -->
+            <div class="swiper-slide ">
+                <a href="/Apartment/house_type/type_id/49.html">
+                    <img class="lazy" data-lazy="loaded" src="https://warmjar-wx.oss-cn-shenzhen.aliyuncs.com/admin/2016-04-19/57164ea03ae22.jpg@!640x320" alt="">
+                </a>
+            </div>
+            <!-- 循环列表结束 -->
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="info">
+        <h2>合租复式三房  &nbsp;&nbsp;<span style="font-size: 12px">剩余   1套   可租</span> </h2>
+        <p>上下双阳台，性价比超值</p>
+    </div>
+</div>         <!-- 循环列表结束 -->
+
+</div>
+
+</@mainlayout>
